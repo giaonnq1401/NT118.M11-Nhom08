@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MagoApp">
         <activity
+            android:name=".dangki"
+            android:exported="true" />
+        <activity
             android:name=".dangnhap"
             android:exported="true" />
         <activity
