@@ -60,7 +60,8 @@
             app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:background="@drawable/edit_text_border">
 
         </EditText>
 
@@ -95,7 +96,7 @@
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            >
+            android:background="@drawable/edit_text_border">
 
         </EditText>
 
@@ -128,7 +129,8 @@
             app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:background="@drawable/edit_text_border">
 
         </EditText>
 
@@ -161,7 +163,8 @@
             app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:background="@drawable/edit_text_border">
 
         </EditText>
 
@@ -194,7 +197,8 @@
             app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            android:background="@drawable/edit_text_border">
 
         </EditText>
 
