@@ -42,7 +42,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".0"
-            app:layout_constraintWidth_percent=".8">
+            app:layout_constraintWidth_percent=".8"
+            android:fontFamily="@font/montserratregular">
 
         </TextView>
 
@@ -75,7 +76,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".15"
-            app:layout_constraintWidth_percent=".8">
+            app:layout_constraintWidth_percent=".8"
+            android:fontFamily="@font/montserratregular">
 
         </TextView>
 
@@ -92,7 +94,8 @@
             app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingBottom="10dp"
+            >
 
         </EditText>
 
@@ -107,7 +110,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".3"
-            app:layout_constraintWidth_percent=".8">
+            app:layout_constraintWidth_percent=".8"
+            android:fontFamily="@font/montserratregular">
 
         </TextView>
 
@@ -139,7 +143,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".45"
-            app:layout_constraintWidth_percent=".8">
+            app:layout_constraintWidth_percent=".8"
+            android:fontFamily="@font/montserratregular">
 
         </TextView>
 
@@ -171,7 +176,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".6"
-            app:layout_constraintWidth_percent=".8">
+            app:layout_constraintWidth_percent=".8"
+            android:fontFamily="@font/montserratregular">
 
         </TextView>
 
