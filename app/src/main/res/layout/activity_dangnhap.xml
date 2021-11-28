@@ -4,46 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dangnhap"
-    >
+    android:padding="30dp"
+    tools:context=".dangnhap">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/welcome"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintHeight_percent=".20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </ImageView>
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    <ImageView-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="0dp"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        android:src="@drawable/welcome"-->
 <!--        app:layout_constraintVertical_bias="0"-->
 <!--        app:layout_constraintHeight_percent=".20"-->
 <!--        app:layout_constraintBottom_toBottomOf="parent"-->
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent">-->
-<!--        <TextView-->
-<!--            android:id="@+id/welcome"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--    </ImageView>-->
 
-<!--            >-->
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="welcome"
+        android:textSize="28sp"
+        android:fontFamily="@font/montserratsemibold"
+        android:textAllCaps="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/endColor"/>
 
-<!--        </TextView>-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratregular"
+        android:text="Sign in to continue"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome"
+        android:layout_marginTop="@dimen/margin_basex4"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -61,17 +60,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_basex4"
+            android:fontFamily="@font/montserratregular"
             android:text="Username*"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".25"
-            app:layout_constraintWidth_percent=".8"
-            android:fontFamily="@font/montserratregular">
-
-        </TextView>
+            app:layout_constraintVertical_bias=".25" />
 
         <EditText
             android:id="@+id/username_input"
@@ -86,10 +83,7 @@
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".3"
-            app:layout_constraintWidth_percent=".8">
-
-        </EditText>
+            app:layout_constraintVertical_bias=".3"/>
 
 
         <TextView
@@ -97,23 +91,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_basex4"
+            android:fontFamily="@font/montserratregular"
             android:text="Password*"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".4"
-            app:layout_constraintWidth_percent=".8"
-            android:fontFamily="@font/montserratregular">
-
-        </TextView>
+            app:layout_constraintVertical_bias=".4" />
 
         <EditText
             android:id="@+id/pass_input"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_border"
+            android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -122,8 +115,7 @@
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".45"
-            app:layout_constraintWidth_percent=".8"/>
+            app:layout_constraintVertical_bias=".45" />
 
         <CheckBox
             android:layout_width="0dp"
@@ -131,14 +123,13 @@
             app:layout_constraintTop_toBottomOf="@+id/pass_input"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="Show password"
-            app:layout_constraintWidth_percent=".8"/>
+            android:text="Show password" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/purple_200"
+            android:backgroundTint="@color/centerColor"
             android:text="Login"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -146,25 +137,23 @@
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.7"
-            app:layout_constraintWidth_percent=".8">
-
+            app:layout_constraintVertical_bias="0.7">
         </Button>
 
-<!--        <Button-->
-<!--            android:id="@+id/btn_signup"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:backgroundTint="@color/purple_200"-->
-<!--            android:text="Sign up"-->
-<!--            android:textColor="@color/black"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias=".5"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias=".8"-->
-<!--            app:layout_constraintWidth_percent=".8"></Button>-->
+        <Button
+            android:id="@+id/btn_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="New User? SIGN UP"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montserratsemibold"
+            android:textColor="@color/endColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:backgroundTint="@color/white"
+            android:elevation="0dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
