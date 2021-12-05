@@ -1,35 +1,70 @@
 package com.example.magoapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.magoapp.data.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 
-public class dangki extends AppCompatActivity {
+public class dangki extends AppCompatActivity implements View.OnClickListener {
 
-    EditText editdate;
+    private TextView login;
+    private EditText editdate, regUsername, regEmail, regPwd, pwdConfirm;
+    private Button regBtn;
+
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangki);
 
+        mAuth = FirebaseAuth.getInstance();
+
         editdate = (EditText) findViewById(R.id.bd_signup);
-        editdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chonngay();
-            }
-        });
+//        editdate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                chonngay();
+//            }
+//        });
+
+        regUsername = (EditText) findViewById(R.id.username_signup);
+        regEmail = (EditText) findViewById(R.id.email_signup);
+        regPwd = (EditText) findViewById(R.id.password_signup);
+        pwdConfirm = (EditText) findViewById(R.id.cf_password_signup);
+        regBtn = (Button) findViewById(R.id.btn_signup);
+        login = (TextView) findViewById(R.id.login);
+
+        regBtn.setOnClickListener(this);
+        login.setOnClickListener(this);
+        editdate.setOnClickListener(this);
     }
+
     private void chonngay(){
         Calendar calendar = Calendar.getInstance();
         int ngay = calendar.get(Calendar.DATE);
@@ -46,5 +81,99 @@ public class dangki extends AppCompatActivity {
             }
         }, nam, thang, ngay);
         datePickerDialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.login:
+                startActivity(new Intent(this, dangnhap.class));
+            case R.id.btn_signup:
+                registerUser();
+                break;
+            case R.id.bd_signup:
+                chonngay();
+                break;
+        }
+    }
+
+    private void registerUser() {
+        String username = regUsername.getText().toString().trim();
+        String email = regEmail.getText().toString().trim();
+        String password = regPwd.getText().toString().trim();
+        String passConfirm = pwdConfirm.getText().toString().trim();
+        String birthday = editdate.getText().toString().trim();
+
+        if (username.isEmpty()){
+            regUsername.setError("Username is required!");
+            regUsername.requestFocus();
+            return;
+        }
+
+        if (email.isEmpty()){
+            regEmail.setError("Email is required!");
+            regEmail.requestFocus();
+            return;
+        }
+
+        if (birthday.isEmpty()){
+            editdate.setError("Date of birth is required!");
+            editdate.requestFocus();
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            regEmail.setError("Please provide valid email!");
+            regEmail.requestFocus();
+            return;
+        }
+
+        if (password.isEmpty()){
+            regPwd.setError("Password is required!");
+            regPwd.requestFocus();
+            return;
+        }
+
+        if (password.length() < 8){
+            regPwd.setError("Min password length should be 8 characters!");
+            regPwd.requestFocus();
+            return;
+        }
+
+        if (!passConfirm.equals(password)){
+            pwdConfirm.setError("Password is not matched!");
+            pwdConfirm.requestFocus();
+            return;
+        }
+
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()){
+                    Users user = new Users(username, email, birthday);
+
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(FirebaseAuth.getInstance().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if (task.isSuccessful()){
+                                Toast.makeText(dangki.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+
+                                //redirect to login layout
+                            }else{
+                                Toast.makeText(dangki.this, "Failed to register! Please try again.", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }else {
+                    Toast.makeText(dangki.this, "Failed to register! Please try again.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 }
