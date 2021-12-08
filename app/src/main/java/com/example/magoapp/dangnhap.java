@@ -93,7 +93,7 @@ public class dangnhap extends AppCompatActivity implements View.OnClickListener 
 
                 if (task.isSuccessful()){
                     //redirect to homepage
-                    startActivity(new Intent(dangnhap.this, HomePage.class));
+                    startActivity(new Intent(dangnhap.this, Container.class));
                 }else {
                     Toast.makeText(dangnhap.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
                 }

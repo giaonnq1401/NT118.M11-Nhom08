@@ -14,7 +14,7 @@
         android:theme="@style/Theme.MagoApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HomePage"
+            android:name=".Container"
             android:exported="false" />
         <activity
             android:name=".dangki"
@@ -29,7 +29,7 @@
         </activity>
         <activity
             android:name=".dangnhap"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
