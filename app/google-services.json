@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "480155171249",
+    "firebase_url": "https://magoapp-3c57e-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "magoapp-3c57e",
+    "storage_bucket": "magoapp-3c57e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:480155171249:android:800efbaf63cf9e108ca590",
+        "android_client_info": {
+          "package_name": "com.example.magoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "480155171249-areooihidhvn4h9camg4rsc1rubbcq5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDblHphvL7rMw4Q50T0yWnFtSQ5w5lAWRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "480155171249-areooihidhvn4h9camg4rsc1rubbcq5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
