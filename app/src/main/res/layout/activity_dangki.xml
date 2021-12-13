@@ -4,21 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dangki">
+    tools:context=".dangki"
+    android:padding="30dp">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="center"
-        android:src="@drawable/createaccount"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintHeight_percent=".2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:scaleType="center"-->
+<!--        android:src="@drawable/createaccount"-->
+<!--        app:layout_constraintVertical_bias="0"-->
+<!--        app:layout_constraintHeight_percent=".2"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-    </ImageView>
+<!--    </ImageView>-->
+
+    <TextView
+        android:id="@+id/tv_createAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="create account"
+        android:textSize="30sp"
+        android:fontFamily="@font/montserratsemibold"
+        android:textAllCaps="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/endColor"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratregular"
+        android:text="Sign up to get started"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_createAccount"
+        android:layout_marginTop="@dimen/margin_basex4"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -42,7 +67,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".0"
-            app:layout_constraintWidth_percent=".8"
             android:fontFamily="@font/montserratregular">
 
         </TextView>
@@ -57,7 +81,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".05"
-            app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -77,7 +100,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".15"
-            app:layout_constraintWidth_percent=".8"
             android:fontFamily="@font/montserratregular">
 
         </TextView>
@@ -92,7 +114,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".2"
-            app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -111,7 +132,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".3"
-            app:layout_constraintWidth_percent=".8"
             android:fontFamily="@font/montserratregular">
 
         </TextView>
@@ -126,7 +146,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".35"
-            app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -146,7 +165,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".45"
-            app:layout_constraintWidth_percent=".8"
             android:fontFamily="@font/montserratregular">
 
         </TextView>
@@ -161,7 +179,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".51"
-            app:layout_constraintWidth_percent=".8"
             android:password="true"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -181,7 +198,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".6"
-            app:layout_constraintWidth_percent=".8"
             android:fontFamily="@font/montserratregular">
 
         </TextView>
@@ -196,7 +212,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias=".5"
             app:layout_constraintVertical_bias=".67"
-            app:layout_constraintWidth_percent=".8"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -215,8 +230,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.847"
-            app:layout_constraintWidth_percent=".8"></Button>
+            app:layout_constraintVertical_bias="0.847"/>
 
         <TextView
             android:id="@+id/login"

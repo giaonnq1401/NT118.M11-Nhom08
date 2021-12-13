@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="welcome"
-        android:textSize="28sp"
+        android:textSize="30sp"
         android:fontFamily="@font/montserratsemibold"
         android:textAllCaps="true"
         app:layout_constraintLeft_toLeftOf="parent"

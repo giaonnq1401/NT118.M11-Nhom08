@@ -16,4 +16,6 @@
 
     <color name="border_edtColor">#D8D8D8</color>
     <color name="textColor">#252A31</color>
+
+    <color name="color1">#E8EDF1</color>
 </resources>
