@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -64,4 +65,9 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
+
+    public class ViewHolder{
+        TextView tentruyen;
+        ImageView imgtruyen;
+    }
 }
