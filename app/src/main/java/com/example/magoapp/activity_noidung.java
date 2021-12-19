@@ -21,8 +21,8 @@ public class activity_noidung extends AppCompatActivity {
 
         //lay du lieu
         Intent intent = getIntent();
-        String tentruyen = intent.getStringExtra( name: "tentruyen");
-        String noidung = intent.getStringExtra( name: "noidung");
+        String tentruyen = intent.getStringExtra(  "tentruyen");
+        String noidung = intent.getStringExtra(  "noidung");
 
         txtTenTruyen.setText(tentruyen);
         txtNoidung.setText(noidung);
