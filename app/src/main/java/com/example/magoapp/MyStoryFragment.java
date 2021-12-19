@@ -141,11 +141,11 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
                 break;
             }
 
-//            case R.id.fabStory:
-//            {
-//                startActivity(new Intent(getActivity(), newStory.class));
-//                break;
-//            }
+            case R.id.fabStory:
+            {
+                startActivity(new Intent(getActivity(), activity_DangBai.class));
+                break;
+            }
 
         }
     }
