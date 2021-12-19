@@ -29,7 +29,7 @@
     <EditText
         android:inputType="text"
         android:id="@+id/dbnoidung"
-        android:hint="Nội dung"
+        android:hint="Mô tả"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:layout_width="300dp"
