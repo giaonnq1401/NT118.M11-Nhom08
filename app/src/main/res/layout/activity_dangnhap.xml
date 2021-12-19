@@ -118,12 +118,13 @@
             app:layout_constraintVertical_bias=".45" />
 
         <CheckBox
+            android:id="@+id/cbRemember"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/pass_input"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="Show password" />
+            android:text="Remember Me" />
 
         <Button
             android:id="@+id/btn_login"

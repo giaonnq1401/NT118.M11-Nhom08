@@ -1,5 +1,6 @@
 package com.example.magoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -99,6 +100,7 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
         isAllFabsVisible = false;
 
         fabAdd.setOnClickListener(this);
+        fabStory.setOnClickListener(this);
     }
 
     @Override
@@ -136,6 +138,12 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
                     // visibility to GONE
                     isAllFabsVisible = false;
                 }
+                break;
+            }
+
+            case R.id.fabStory:
+            {
+                startActivity(new Intent(getActivity(), activity_DangBai.class));
                 break;
             }
 
