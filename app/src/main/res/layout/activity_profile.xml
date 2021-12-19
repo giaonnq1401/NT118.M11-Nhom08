@@ -13,23 +13,56 @@
         android:padding="20dp"
         android:background="@drawable/gradient">
 
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_basex4"
+                android:layout_toEndOf="@+id/back"
+                android:layout_toRightOf="@+id/back"
+                android:fontFamily="@font/montserratregular"
+                android:text="Profile"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_setting" />
+        </RelativeLayout>
+
         <ImageView
             android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerVertical="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="@dimen/margin_basex4"
+            android:src="@drawable/ic_user" />
 
         <TextView
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mago"
-            android:textSize="20sp"
+            android:layout_below="@+id/profile_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_basex2"
             android:fontFamily="@font/montserratsemibold"
-            android:layout_toRightOf="@id/profile_image"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/textColor"/>
+            android:text="mago"
+            android:textColor="@color/textColor"
+            android:textSize="20sp" />
     </RelativeLayout>
 
     <RelativeLayout

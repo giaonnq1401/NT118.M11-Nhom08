@@ -86,14 +86,15 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.login:
-                startActivity(new Intent(this, dangnhap.class));
+
             case R.id.btn_signup:
                 registerUser();
                 break;
             case R.id.bd_signup:
                 chonngay();
                 break;
+            case R.id.login:
+                startActivity(new Intent(this, dangnhap.class));
         }
     }
 
