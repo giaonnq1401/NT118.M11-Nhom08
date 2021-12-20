@@ -12,9 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.magoapp.data.Story;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +37,10 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
     FloatingActionButton fabAdd, fabStory, fabChaper;
     TextView tvAddStory, tvUpdateStory;
     Boolean isAllFabsVisible;
+    ListView lvMyStory;
+    ArrayAdapter<String> arrayAdapter;
+
+    private DatabaseReference mRef;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,8 +116,41 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
 
         fabAdd.setOnClickListener(this);
         fabStory.setOnClickListener(this);
+
+
+        //my story list
+        mRef = FirebaseDatabase.getInstance().getReference("Story");
+
+        lvMyStory = (ListView) getView().findViewById(R.id.lvStory);
+
+        ValueEventListener event = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myStory(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        mRef.addListenerForSingleValueEvent(event);
     }
 
+    private void myStory(DataSnapshot snapshot) {
+        ArrayList<String> storylist = new ArrayList<>();
+        if (snapshot.exists()) {
+
+            for (DataSnapshot ds : snapshot.getChildren()) {
+                String name = ds.child("sName").getValue(String.class);
+                storylist.add(name);
+            }
+
+            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
+            lvMyStory.setAdapter(adapter);
+
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId())

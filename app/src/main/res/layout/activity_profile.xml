@@ -47,8 +47,8 @@
             android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_centerHorizontal="true"
             android:layout_below="@+id/toolbar"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_basex4"
             android:src="@drawable/ic_user" />
 

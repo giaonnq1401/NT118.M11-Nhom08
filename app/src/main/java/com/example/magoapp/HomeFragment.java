@@ -2,13 +2,27 @@ package com.example.magoapp;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.magoapp.data.Story;
+import com.example.magoapp.data.Users;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,7 +31,11 @@ import android.widget.TextView;
  */
 public class HomeFragment extends Fragment {
 
-    private TextView textViewTitle;
+    private ListView lvStory;
+    ArrayList<String> listStory = new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
+    DatabaseReference mDatabase;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -65,9 +83,65 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-
-    public class ViewHolder{
-        TextView tentruyen;
-        ImageView imgtruyen;
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        mDatabase = FirebaseDatabase.getInstance().getReference("Story");
+//        lvStory = (ListView) getView().findViewById(R.id.lvStory);
+//        arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_layout, R.id.name_story, listStory);
+//        lvStory.setAdapter(arrayAdapter);
+//        mDatabase.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//                String value = snapshot.getValue(Story.class).toString();
+//                listStory.add(value);
+//                arrayAdapter.notifyDataSetChanged();
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//    }
+//
+//    class Story{
+//
+//        public Story(String sName) {
+//            this.sName = sName;
+//        }
+//
+//        public String getsName() {
+//            return sName;
+//        }
+//
+//        public String getsAuthor() {
+//            return sAuthor;
+//        }
+//
+//        public String sName, sAuthor;
+//    }
+//
+//    public class ViewHolder{
+//        TextView tentruyen;
+//        ImageView imgtruyen;
+//    }
 }

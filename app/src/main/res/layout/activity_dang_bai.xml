@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="@dimen/margin_basex4"
     tools:context=".activity_DangBai">
 
     <TextView
@@ -13,42 +14,69 @@
         android:layout_marginTop="70dp"
         android:gravity="center"
         android:textSize="30sp"
-        android:text="Thêm truyện"
+        android:text="New Story"
+        android:fontFamily="@font/montserratsemibold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></TextView>
     
     <EditText
         android:inputType="text"
         android:id="@+id/dbTenTruyen"
-        android:hint="Tên truyện"
+        android:hint="Story's name"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_basex2"
+        android:background="@drawable/edit_text_border"></EditText>
 
     <EditText
+        android:id="@+id/storyDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"
+        android:background="@drawable/edit_text_border"
+        android:padding="@dimen/margin_basex2"
+        android:layout_marginTop="@dimen/margin_basex4"/>
+
+    <EditText
+        android:id="@+id/dbChapter"
         android:inputType="text"
+        android:hint="Chapter"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_border"
+        android:padding="@dimen/margin_basex2"/>
+
+    <EditText
+        android:inputType="textMultiLine"
         android:id="@+id/dbnoidung"
-        android:hint="Nội dung"
+        android:hint="Content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"></EditText>
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_basex2"
+        android:background="@drawable/edit_text_border"
+        ></EditText>
 
-    <EditText
-        android:inputType="text"
-        android:id="@+id/dbimg"
-        android:hint="Ảnh "
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"></EditText>
+<!--    <EditText-->
+<!--        android:inputType="text"-->
+<!--        android:id="@+id/dbimg"-->
+<!--        android:hint="Ảnh "-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"></EditText>-->
 
     <Button
-        android:id="@+id/dbdangbai"
+        android:id="@+id/btn_dangbai"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:text="Đăng bài"
+        android:text="upload"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></Button>
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/endColor"></Button>
 </LinearLayout>
