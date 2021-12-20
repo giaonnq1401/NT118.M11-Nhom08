@@ -52,31 +52,35 @@
 <!--            />-->
 <!--    </LinearLayout>-->
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<!--    <LinearLayout-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        tools:ignore="MissingConstraints"-->
+<!--        android:background="@drawable/vien"-->
+<!--        android:padding="10dp">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imglisttruyen"-->
+<!--            android:layout_width="90dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:src="@drawable/ic_image"-->
+<!--            />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvlisttruyen"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:textSize="25dp"-->
+<!--            android:text="Tên truyện"-->
+<!--            android:fontFamily="@font/montserratregular"/>-->
+
+<!--    </LinearLayout>-->
+    <ListView
+        android:id="@+id/lv_story"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        android:background="@drawable/vien"
-        android:padding="10dp">
-
-        <ImageView
-            android:id="@+id/imglisttruyen"
-            android:layout_width="90dp"
-            android:layout_height="80dp"
-            android:src="@drawable/ic_image"
-            />
-
-        <TextView
-            android:id="@+id/tvlisttruyen"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="25dp"
-            android:text="Tên truyện"
-            android:fontFamily="@font/montserratregular"/>
-
-    </LinearLayout>
+        android:layout_height="match_parent"></ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

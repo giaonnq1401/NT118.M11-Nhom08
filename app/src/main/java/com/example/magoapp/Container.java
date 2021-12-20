@@ -13,15 +13,24 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Container extends AppCompatActivity implements View.OnClickListener{
 
     ImageView imgViewProfile;
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
+
+        mAuth = FirebaseAuth.getInstance();
 
         imgViewProfile = (ImageView) findViewById(R.id.imgUser);
         imgViewProfile.setOnClickListener(this);
