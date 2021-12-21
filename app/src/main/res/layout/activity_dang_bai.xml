@@ -137,14 +137,4 @@
         android:background="@drawable/edit_text_border"
         android:layout_below="@id/dbChapter"/>
 
-
-<!--    <Button-->
-<!--        android:id="@+id/btn_dangbai"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:text="upload"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:backgroundTint="@color/endColor"-->
-<!--        android:layout_below="@id/dbnoidung"-->
-<!--        android:layout_centerInParent="true"/>-->
 </RelativeLayout>
