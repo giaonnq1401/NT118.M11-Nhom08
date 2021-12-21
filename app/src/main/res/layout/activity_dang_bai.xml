@@ -104,6 +104,7 @@
         android:layout_below="@id/upload"/>
 
     <EditText
+
         android:id="@+id/storyDesc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

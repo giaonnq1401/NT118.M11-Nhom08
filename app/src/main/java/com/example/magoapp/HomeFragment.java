@@ -121,6 +121,7 @@ public class HomeFragment extends Fragment {
         ArrayList<String> storylist = new ArrayList<>();
         if (snapshot.exists()) {
 
+
             for (DataSnapshot ds : snapshot.getChildren()) {
                 String name = ds.child("sName").getValue(String.class);
                 storylist.add(name);

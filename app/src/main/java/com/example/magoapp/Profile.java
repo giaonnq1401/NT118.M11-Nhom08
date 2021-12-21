@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements View.OnClickListener{
 
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -29,6 +29,9 @@ public class Profile extends AppCompatActivity {
 
     private DatabaseReference mDatabaseRef;
     private FirebaseAuth mAuth;
+
+    private ImageView back;
+    private ImageView setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +62,23 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        back = (ImageView) findViewById(R.id.back);
+        setting = (ImageView)findViewById(R.id.setting);
+        back.setOnClickListener(this);
+        setting.setOnClickListener(this);
     }
 
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.back:
+                startActivity(new Intent(this, Container.class));
+                break;
+            case R.id.setting:
+                startActivity(new Intent(this, SettingActivity.class));
+                break;
+        }
+    }
 
 }

@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable-anydpi/ic_home.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable-anydpi/ic_search.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/edit_text_border.xml" value="0.290625" />
@@ -34,30 +35,40 @@
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/drawable/gradient_text.xml" value="0.19166666666666668" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangnhap.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/layout/activity_main.xml" value="0.264" />
+
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/edit_text_border.xml" value="0.37864583333333335" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/gradiant.xml" value="0.37864583333333335" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/gradient.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_home.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_image.xml" value="0.37864583333333335" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_launcher_background.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_library.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_logomaga.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_search.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_story.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/ic_user.xml" value="0.37864583333333335" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/vien.xml" value="0.37864583333333335" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_container.xml" value="0.3625" />
+        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_dang_bai.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangki.xml" value="0.33" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangnhap.xml" value="0.3625" />
-        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_main.xml" value="0.3569230769230769" />
+        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_noidung.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile.xml" value="0.3625" />
+        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_setting.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/fragment_about_me.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/fragment_library.xml" value="0.3625" />
+        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/fragment_mota.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/fragment_my_story.xml" value="0.3625" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/fragment_search.xml" value="0.3625" />
+        <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/layout/item_story.xml" value="0.3625" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_container.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_dang_bai.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangki.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangnhap.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_main.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_noidung.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_about_me.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_home.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_library.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_my_story.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
