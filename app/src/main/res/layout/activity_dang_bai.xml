@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,16 +8,88 @@
     android:layout_margin="@dimen/margin_basex4"
     tools:context=".activity_DangBai">
 
-    <TextView
-        android:textColor="#252A31"
-        android:textStyle="bold"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:text="New Story"
-        android:fontFamily="@font/montserratsemibold"
+    <RelativeLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></TextView>
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_basex4"
+            android:layout_toEndOf="@+id/back"
+            android:layout_toRightOf="@+id/back"
+            android:fontFamily="@font/montserratregular"
+            android:text="Add Story"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_dangbai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toStartOf="@+id/tv"
+            android:backgroundTint="@color/endColor"
+            android:text="public" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvNewStory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserratsemibold"
+        android:gravity="center"
+        android:text="New Story"
+        android:textColor="#252A31"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/toolbar"></TextView>
+
+    <RelativeLayout
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNewStory"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/margin_basex4">
+
+        <TextView
+            android:id="@+id/tvUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Photo of Story"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/img_story"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_basex4"
+            android:layout_below="@id/tvUpload"/>
+
+        <Button
+            android:id="@+id/btn_upImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_story"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="@color/centerColor"
+            android:text="upload" />
+    </RelativeLayout>
+
+
     
     <EditText
         android:inputType="text"
@@ -28,7 +100,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_basex2"
-        android:background="@drawable/edit_text_border"></EditText>
+        android:background="@drawable/edit_text_border"
+        android:layout_below="@id/upload"/>
 
     <EditText
         android:id="@+id/storyDesc"
@@ -37,7 +110,8 @@
         android:hint="Description"
         android:background="@drawable/edit_text_border"
         android:padding="@dimen/margin_basex2"
-        android:layout_marginTop="@dimen/margin_basex4"/>
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_below="@id/dbTenTruyen"/>
 
     <EditText
         android:id="@+id/dbChapter"
@@ -48,7 +122,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_border"
-        android:padding="@dimen/margin_basex2"/>
+        android:padding="@dimen/margin_basex2"
+        android:layout_below="@id/storyDesc"/>
 
     <EditText
         android:inputType="textMultiLine"
@@ -60,23 +135,16 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_basex2"
         android:background="@drawable/edit_text_border"
-        ></EditText>
+        android:layout_below="@id/dbChapter"/>
 
-<!--    <EditText-->
-<!--        android:inputType="text"-->
-<!--        android:id="@+id/dbimg"-->
-<!--        android:hint="Ảnh "-->
-<!--        android:layout_gravity="center"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:layout_width="300dp"-->
-<!--        android:layout_height="wrap_content"></EditText>-->
 
-    <Button
-        android:id="@+id/btn_dangbai"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="upload"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/endColor"></Button>
-</LinearLayout>
+<!--    <Button-->
+<!--        android:id="@+id/btn_dangbai"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:text="upload"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:backgroundTint="@color/endColor"-->
+<!--        android:layout_below="@id/dbnoidung"-->
+<!--        android:layout_centerInParent="true"/>-->
+</RelativeLayout>
