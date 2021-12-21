@@ -1,19 +1,34 @@
 package com.example.magoapp;
 
+import static android.content.ContentValues.TAG;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
+import android.util.Log;
+import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener{
 
     TabLayout tabLayout;
     ViewPager viewPager;
+    private TextView tv_userName;
+    private String nameUser,emailUser, dobUser;
+
+    private DatabaseReference mDatabaseRef;
+    private FirebaseAuth mAuth;
 
     private ImageView back;
     private ImageView setting;
@@ -65,4 +80,5 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
                 break;
         }
     }
+
 }

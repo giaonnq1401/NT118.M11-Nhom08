@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_story"
+        android:layout_width="85dp"
+        android:layout_height="86dp"
+        tools:srcCompat="@tools:sample/avatars"
+        android:layout_marginTop="@dimen/margin_basex2"/>
+
+    <TextView
+        android:id="@+id/name_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/img_story"
+        android:text="Story's name"
+        android:textSize="20sp"
+        android:layout_marginLeft="@dimen/margin_basex4"
+        android:layout_marginRight="@dimen/margin_basex4"
+        android:layout_marginTop="@dimen/margin_basex2"/>
+
+    <TextView
+        android:id="@+id/author_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/img_story"
+        android:layout_below="@id/name_story"
+        android:layout_marginLeft="@dimen/margin_basex4"
+        android:layout_marginRight="@dimen/margin_basex4"
+        android:layout_marginTop="@dimen/margin_basex2"
+        android:text="Author"
+        android:textSize="14sp"/>
+</RelativeLayout>

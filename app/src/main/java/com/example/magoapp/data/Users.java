@@ -1,15 +1,37 @@
 package com.example.magoapp.data;
 
 public class Users {
-    public String username, email, doB;
+    private String nameUser, emailUser, DoBUser;
 
-    public Users(){
+    public Users(){}
 
+    public Users(String nameUser, String emailUser, String doBUser) {
+        this.nameUser = nameUser;
+        this.emailUser = emailUser;
+        this.DoBUser = doBUser;
     }
 
-    public Users(String username, String email, String doB){
-        this.username = username;
-        this.email = email;
-        this.doB = doB;
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
+    public String getDoBUser() {
+        return DoBUser;
+    }
+
+    public void setDoBUser(String doBUser) {
+        DoBUser = doBUser;
     }
 }

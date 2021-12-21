@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".HomeFragment">
+    tools:context=".HomeFragment"
+    android:id="@+id/fragment_home">
 
     <!-- TODO: Update blank fragment layout -->
 <!--    <LinearLayout-->
@@ -52,7 +53,9 @@
 <!--            />-->
 <!--    </LinearLayout>-->
 
-<!--    <LinearLayout-->
+
+<!--    <RelativeLayout-->
+
 <!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="100dp"-->
@@ -69,18 +72,25 @@
 <!--            />-->
 
 <!--        <TextView-->
-<!--            android:id="@+id/tvlisttruyen"-->
+
+<!--            android:id="@+id/tv_nameStory"-->
 <!--            android:layout_width="match_parent"-->
 <!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toEndOf="@+id/imglisttruyen"-->
+<!--            android:fontFamily="@font/montserratregular"-->
 <!--            android:gravity="center"-->
-<!--            android:textSize="25dp"-->
 <!--            android:text="Tên truyện"-->
-<!--            android:fontFamily="@font/montserratregular"/>-->
+<!--            android:textSize="25dp" />-->
 
-<!--    </LinearLayout>-->
+<!--    </RelativeLayout>-->
+
     <ListView
-        android:id="@+id/lv_story"
+        android:id="@+id/lvStory"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

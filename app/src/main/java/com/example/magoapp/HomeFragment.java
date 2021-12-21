@@ -1,14 +1,31 @@
 package com.example.magoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.magoapp.data.Story;
+import com.example.magoapp.data.Users;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,7 +34,9 @@ import android.widget.TextView;
  */
 public class HomeFragment extends Fragment {
 
-    private TextView textViewTitle;
+    private ListView lvStory;
+    DatabaseReference mRef;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -62,11 +81,56 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_home, container, false);
 
-        return inflater.inflate(R.layout.item_story, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //my story list
+        mRef = FirebaseDatabase.getInstance().getReference("Story");
+
+        lvStory = (ListView) getView().findViewById(R.id.lvStory);
+
+        ValueEventListener event = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                libStory(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        mRef.addListenerForSingleValueEvent(event);
+
+        lvStory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), activity_story.class);
+                ((Container)getActivity()).startActivity(intent);
+            }
+        });
+
+    }
+
+    private void libStory(DataSnapshot snapshot) {
+        ArrayList<String> storylist = new ArrayList<>();
+        if (snapshot.exists()) {
 
 
+            for (DataSnapshot ds : snapshot.getChildren()) {
+                String name = ds.child("sName").getValue(String.class);
+                storylist.add(name);
+            }
+
+            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
+            lvStory.setAdapter(adapter);
+
+        }
+    }
 
 }
