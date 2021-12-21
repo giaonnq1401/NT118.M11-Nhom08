@@ -1,5 +1,6 @@
 package com.example.magoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -32,9 +35,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private ListView lvStory;
-    ArrayList<String> listStory = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter;
-    DatabaseReference mDatabase;
+    DatabaseReference mRef;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,67 +82,54 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+
     }
 
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//
-//        mDatabase = FirebaseDatabase.getInstance().getReference("Story");
-//        lvStory = (ListView) getView().findViewById(R.id.lvStory);
-//        arrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_layout, R.id.name_story, listStory);
-//        lvStory.setAdapter(arrayAdapter);
-//        mDatabase.addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//                String value = snapshot.getValue(Story.class).toString();
-//                listStory.add(value);
-//                arrayAdapter.notifyDataSetChanged();
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//
-//    }
-//
-//    class Story{
-//
-//        public Story(String sName) {
-//            this.sName = sName;
-//        }
-//
-//        public String getsName() {
-//            return sName;
-//        }
-//
-//        public String getsAuthor() {
-//            return sAuthor;
-//        }
-//
-//        public String sName, sAuthor;
-//    }
-//
-//    public class ViewHolder{
-//        TextView tentruyen;
-//        ImageView imgtruyen;
-//    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //my story list
+        mRef = FirebaseDatabase.getInstance().getReference("Story");
+
+        lvStory = (ListView) getView().findViewById(R.id.lvStory);
+
+        ValueEventListener event = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                libStory(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        mRef.addListenerForSingleValueEvent(event);
+
+        lvStory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), activity_story.class);
+                ((Container)getActivity()).startActivity(intent);
+            }
+        });
+
+    }
+
+    private void libStory(DataSnapshot snapshot) {
+        ArrayList<String> storylist = new ArrayList<>();
+        if (snapshot.exists()) {
+
+            for (DataSnapshot ds : snapshot.getChildren()) {
+                String name = ds.child("sName").getValue(String.class);
+                storylist.add(name);
+            }
+
+            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
+            lvStory.setAdapter(adapter);
+
+        }
+    }
+
 }

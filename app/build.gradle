@@ -43,6 +43,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-appcheck-debug:16.0.0-beta04'
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
     // FirebaseUI for Firebase Realtime Database
     implementation 'com.firebaseui:firebase-ui-database:8.0.0'
 

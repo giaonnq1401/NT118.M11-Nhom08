@@ -156,9 +156,9 @@ public class SearchFragment extends Fragment {
                 if (snapshot.exists()){
 
                     ArrayList<String> listStory = new ArrayList<>();
-                    for (DataSnapshot ds:snapshot.getChildren()){
-                        Story story = new Story(ds.child("sName").getValue(String.class), ds.child("sAuthor").getValue(String.class));
-                        listStory.add(story.getsName() + story.getsAuthor());
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        String name = ds.child("sName").getValue(String.class);
+                        listStory.add(name);
                     }
 
                     ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.list_layout, R.id.name_story, listStory);

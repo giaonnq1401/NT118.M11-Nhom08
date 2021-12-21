@@ -18,11 +18,13 @@ import android.widget.TextView;
 
 import com.example.magoapp.data.Story;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -139,17 +141,29 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
 
     private void myStory(DataSnapshot snapshot) {
         ArrayList<String> storylist = new ArrayList<>();
-        if (snapshot.exists()) {
+        Query query = mRef.orderByChild("sAuthor").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
 
-            for (DataSnapshot ds : snapshot.getChildren()) {
-                String name = ds.child("sName").getValue(String.class);
-                storylist.add(name);
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+
+                        String name = ds.child("sName").getValue(String.class);
+                        storylist.add(name);
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
+                    lvMyStory.setAdapter(adapter);
+
+                }
             }
 
-            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
-            lvMyStory.setAdapter(adapter);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        }
+            }
+        });
+
     }
     @Override
     public void onClick(View v) {
