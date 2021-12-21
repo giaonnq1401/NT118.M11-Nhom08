@@ -16,6 +16,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
     ViewPager viewPager;
 
     private ImageView back;
+    private ImageView setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         });
 
         back = (ImageView) findViewById(R.id.back);
+        setting = (ImageView)findViewById(R.id.setting);
         back.setOnClickListener(this);
+        setting.setOnClickListener(this);
     }
 
 
@@ -56,6 +59,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.back:
                 startActivity(new Intent(this, Container.class));
+                break;
+            case R.id.setting:
+                startActivity(new Intent(this, SettingActivity.class));
                 break;
         }
     }
