@@ -6,11 +6,15 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class activity_story extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+
+    DatabaseReference mStoryRef, mUserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +28,7 @@ public class activity_story extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Chapter"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        final ProfileAdapter adapter = new ProfileAdapter(this,getSupportFragmentManager(),
+        final StoryAdapter adapter = new StoryAdapter(this,getSupportFragmentManager(),
                 tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -41,5 +45,6 @@ public class activity_story extends AppCompatActivity {
             }
         });
 
+        mStoryRef = FirebaseDatabase.getInstance().getReference("Story");
     }
 }

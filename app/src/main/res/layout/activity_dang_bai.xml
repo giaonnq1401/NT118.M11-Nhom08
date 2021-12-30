@@ -75,20 +75,11 @@
             android:id="@+id/img_story"
             android:layout_width="60dp"
             android:layout_height="80dp"
+            android:layout_below="@id/tvUpload"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_basex4"
-            android:layout_below="@id/tvUpload"/>
+            android:layout_marginTop="@dimen/margin_basex4" />
 
-        <Button
-            android:id="@+id/btn_upImg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_story"
-            android:layout_centerHorizontal="true"
-            android:backgroundTint="@color/centerColor"
-            android:text="upload" />
     </RelativeLayout>
-
 
     
     <EditText

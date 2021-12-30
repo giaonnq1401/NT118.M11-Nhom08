@@ -60,7 +60,6 @@ public class activity_DangBai extends AppCompatActivity {
         ed_nameChapter = (EditText) findViewById(R.id.dbChapter);
         ed_contentChapter = (EditText) findViewById(R.id.dbnoidung);
         btn_upload = (Button) findViewById(R.id.btn_dangbai);
-        btn_upImage = (Button) findViewById(R.id.btn_upImg);
 
         img_story.setOnClickListener(new View.OnClickListener() {
             @Override

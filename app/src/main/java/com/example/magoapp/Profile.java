@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener{
@@ -30,7 +31,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
     private TextView tv_userName;
     private String nameUser,emailUser, dobUser;
 
-    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mRef;
     private FirebaseAuth mAuth;
 
     private ImageView back;
@@ -69,6 +70,29 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         setting = (ImageView)findViewById(R.id.setting);
         back.setOnClickListener(this);
         setting.setOnClickListener(this);
+
+        mRef = FirebaseDatabase.getInstance().getReference("Users");
+        tv_userName = (TextView) findViewById(R.id.user_name);
+        getInfo();
+    }
+
+    private void getInfo() {
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    if (currentUser.equals(ds.getKey())){
+                        tv_userName.setText(ds.child("nameUser").getValue(String.class));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
