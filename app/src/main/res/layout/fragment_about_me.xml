@@ -22,6 +22,7 @@
             app:boxBackgroundColor="@color/color1">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="mago"
@@ -39,6 +40,7 @@
             app:boxBackgroundColor="@color/color1">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1/1/2001"
@@ -56,6 +58,7 @@
             app:boxBackgroundColor="@color/color1">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/hobbies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="mago"

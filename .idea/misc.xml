@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable-anydpi/ic_home.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable-anydpi/ic_search.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/edit_text_border.xml" value="0.290625" />
@@ -19,8 +18,9 @@
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_noidung.xml" value="0.17291666666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile.xml" value="0.27447916666666666" />
-        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.14628623188405798" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.2" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_about_me.xml" value="0.264" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_chapter.xml" value="0.1828125" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_library.xml" value="0.23697916666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_my_story.xml" value="0.2171875" />
@@ -35,7 +35,6 @@
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/drawable/gradient_text.xml" value="0.19166666666666668" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangnhap.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/layout/activity_main.xml" value="0.264" />
-
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37864583333333335" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/gradiant.xml" value="0.37864583333333335" />
         <entry key="..\:/HK5/Phat trien ung dung di dong/NT118.M11-Nhom08/app/src/main/res/drawable/gradient.xml" value="0.37864583333333335" />
