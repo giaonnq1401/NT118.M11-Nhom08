@@ -71,13 +71,15 @@
             android:text="Photo of Story"
             android:layout_centerHorizontal="true"/>
 
+
         <ImageView
             android:id="@+id/img_story"
             android:layout_width="60dp"
             android:layout_height="80dp"
             android:layout_below="@id/tvUpload"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_basex4" />
+            android:layout_marginTop="@dimen/margin_basex2"
+            android:src="@color/centerColor"/>
 
     </RelativeLayout>
 
