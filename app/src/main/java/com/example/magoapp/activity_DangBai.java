@@ -18,13 +18,17 @@ import android.widget.Toast;
 
 import com.example.magoapp.data.Chapter;
 import com.example.magoapp.data.Story;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -36,7 +40,7 @@ import java.util.UUID;
 public class activity_DangBai extends AppCompatActivity {
 
     private EditText ed_nameStory, ed_descStory, ed_nameChapter, ed_contentChapter;
-    private Button btn_upload, btn_upImage;
+    private Button btn_upload;
     private ImageView img_story;
 
     // Uri indicates, where the image will be picked from
@@ -46,8 +50,11 @@ public class activity_DangBai extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 22;
 
     // instance for firebase storage and StorageReference
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    FirebaseStorage fStore;
+    StorageReference storageRef;
+
+    DatabaseReference mRef;
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,17 +68,17 @@ public class activity_DangBai extends AppCompatActivity {
         ed_contentChapter = (EditText) findViewById(R.id.dbnoidung);
         btn_upload = (Button) findViewById(R.id.btn_dangbai);
 
+
+        database = FirebaseDatabase.getInstance();
+        mRef = database.getReference("Story");
+        fStore = FirebaseStorage.getInstance();
+        storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference profileRef = storageRef.child("story/" + mRef.getKey() + "/avatar.jpg");
+
         img_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SelectImage();
-            }
-        });
-
-        btn_upImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadImage();
             }
         });
 
@@ -91,44 +98,25 @@ public class activity_DangBai extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(
-                Intent.createChooser(
-                        intent,
-                        "Select Image from here..."),
-                PICK_IMAGE_REQUEST);
+        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."),PICK_IMAGE_REQUEST);
     }
 
     // Override onActivityResult method
     @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    Intent data)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         // checking request code and result code
         // if request code is PICK_IMAGE_REQUEST and
         // resultCode is RESULT_OK
         // then set image in the image view
-        if (requestCode == PICK_IMAGE_REQUEST
-                && resultCode == RESULT_OK
-                && data != null
-                && data.getData() != null) {
-
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             // Get the Uri of data
             filePath = data.getData();
             try {
-
                 // Setting image on image view using Bitmap
-                Bitmap bitmap = MediaStore
-                        .Images
-                        .Media
-                        .getBitmap(
-                                getContentResolver(),
-                                filePath);
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
                 img_story.setImageBitmap(bitmap);
             }
 
@@ -139,81 +127,24 @@ public class activity_DangBai extends AppCompatActivity {
         }
     }
 
-    private void uploadImage() {
-        if (filePath != null) {
-
-            // Code for showing progressDialog while uploading
-            ProgressDialog progressDialog
-                    = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-
-            // Defining the child of storageReference
-            StorageReference ref
-                    = storageReference
-                    .child(
-                            "images/"
-                                    + UUID.randomUUID().toString());
-
-            // adding listeners on upload
-            // or failure of image
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
-                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
-
-                                @Override
-                                public void onSuccess(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
-
-                                    // Image uploaded successfully
-                                    // Dismiss dialog
-                                    progressDialog.dismiss();
-                                    Toast
-                                            .makeText(activity_DangBai.this,
-                                                    "Image Uploaded!!",
-                                                    Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                            })
-
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e)
-                        {
-                            // Error, Image not uploaded
-                            progressDialog.dismiss();
-                            Toast
-                                    .makeText(activity_DangBai.this,
-                                            "Failed " + e.getMessage(),
-                                            Toast.LENGTH_SHORT)
-                                    .show();
-                        }
-                    })
-                    .addOnProgressListener(
-                            new OnProgressListener<UploadTask.TaskSnapshot>() {
-
-                                // Progress Listener for loading
-                                // percentage on the dialog box
-                                @Override
-                                public void onProgress(
-                                        UploadTask.TaskSnapshot taskSnapshot)
-                                {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int)progress + "%");
-                                }
-                            });
-        }
+    private void uploadImageToFirebase(Uri filePath, String idStory) {
+        //upload image to Firebase Storage
+        final StorageReference fileRef = storageRef.child("story/" + idStory + "/avatar.jpg");
+        fileRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Toast.makeText(activity_DangBai.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(activity_DangBai.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+
     private void onClickPushData(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference mRef = database.getReference("Story");
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         String nameStory = ed_nameStory.getText().toString().trim();
@@ -227,8 +158,10 @@ public class activity_DangBai extends AppCompatActivity {
         mRef.push().setValue(story, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                uploadImageToFirebase(filePath, ref.getKey());
                 Toast.makeText(activity_DangBai.this, "Upload successfully", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 }
