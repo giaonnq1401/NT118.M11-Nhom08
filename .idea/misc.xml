@@ -64,12 +64,16 @@
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_main.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_noidung.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile.xml" value="0.24818840579710144" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_setting.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_about_me.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_home.xml" value="0.24818840579710144" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_library.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_my_story.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/item_story.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/list_layout.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/19520/AndroidStudioProjects/NT118.M11-Nhom08/app/src/main/res/layout/my_story_list.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
