@@ -1,6 +1,7 @@
 package com.example.magoapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,17 +16,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.magoapp.data.Story;
 import com.example.magoapp.data.Users;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +43,13 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     private ListView lvStory;
+    private String idStory, name, desc;
+    List<String> keys = new ArrayList<>();
+
     DatabaseReference mRef;
+    // instance for firebase storage and StorageReference
+    FirebaseStorage fStore;
+    StorageReference storageRef, profileRef;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -110,26 +124,36 @@ public class HomeFragment extends Fragment {
         lvStory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idStory = keys.get(position);
                 Intent intent = new Intent(getActivity(), activity_story.class);
+                intent.putExtra("idStory",idStory);
                 ((Container)getActivity()).startActivity(intent);
             }
         });
 
+        storageRef = FirebaseStorage.getInstance().getReference();
+        profileRef = storageRef.child("story/" + mRef.getKey() + "/avatar.jpg");
+
     }
 
+
     private void libStory(DataSnapshot snapshot) {
-        ArrayList<String> storylist = new ArrayList<>();
+        ArrayList<String> storylist_name = new ArrayList<>();
+//        ArrayList<String> storylist_desc = new ArrayList<>();
         if (snapshot.exists()) {
 
-
             for (DataSnapshot ds : snapshot.getChildren()) {
-                String name = ds.child("sName").getValue(String.class);
-                storylist.add(name);
+                keys.add(ds.getKey());
+                name = ds.child("sName").getValue(String.class);
+                storylist_name.add(name);
+//                desc = ds.child("sDesc").getValue(String.class);
+//                storylist_desc.add(desc);
             }
 
-            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
+            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist_name);
             lvStory.setAdapter(adapter);
-
+//            ArrayAdapter desc_adap = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.desc_story, storylist_desc);
+//            lvStory.setAdapter(desc_adap);
         }
     }
 
