@@ -68,8 +68,8 @@
             android:id="@+id/tvUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Photo of Story"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:text="Photo of Story" />
 
 
         <ImageView
@@ -79,7 +79,7 @@
             android:layout_below="@id/tvUpload"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_basex2"
-            android:src="@color/centerColor"/>
+            android:src="@color/centerColor" />
 
     </RelativeLayout>
 
