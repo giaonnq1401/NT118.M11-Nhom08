@@ -67,8 +67,8 @@ public class Chapter extends AppCompatActivity {
         ArrayList<String> chapterlist= new ArrayList<>();
         if (snapshot.exists()) {
             for (DataSnapshot ds : snapshot.getChildren()) {
-                keys.add(ds.getKey());
                 if (idStory.equals(ds.child("idStory").getValue(String.class))){
+                    keys.add(ds.getKey());
                     name = ds.child("nameChapter").getValue(String.class);
                     chapterlist.add(name);
                 }

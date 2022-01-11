@@ -43,7 +43,7 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
     TextView tvAddStory, tvUpdateStory;
     Boolean isAllFabsVisible;
     ListView lvMyStory;
-    private String idStory, name, desc;
+    private String idStory, name, desc, image;
     List<String> keys = new ArrayList<>();
 
     private DatabaseReference mRef;
@@ -113,6 +113,7 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
 
         fabAdd.setOnClickListener(this);
         fabStory.setOnClickListener(this);
+        fabChaper.setOnClickListener(this);
 
 
         //my story list
@@ -158,7 +159,8 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
                         keys.add(ds.getKey());
                         name = ds.child("sName").getValue(String.class);
                         desc = ds.child("sDesc").getValue(String.class);
-                        Story newStory = new Story(name, desc);
+                        image = ds.child("sImage").getValue(String.class);
+                        Story newStory = new Story(name, desc, image);
                         adapter.add(newStory);
                     }
 
@@ -214,6 +216,11 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
             {
                 startActivity(new Intent(getActivity(), activity_DangBai.class));
                 break;
+            }
+
+            case R.id.fabChapter:
+            {
+                startActivity(new Intent(getActivity(), ChooseStoryUpdate.class));
             }
 
         }

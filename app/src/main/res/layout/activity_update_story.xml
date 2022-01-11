@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_basex4"
+    tools:context=".UpdateStory">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_basex4"
+            android:layout_toEndOf="@+id/back"
+            android:layout_toRightOf="@+id/back"
+            android:fontFamily="@font/montserratregular"
+            android:text="Update Story"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_dangbai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toStartOf="@+id/tv"
+            android:backgroundTint="@color/endColor"
+            android:text="public" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvNewChapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/montserratsemibold"
+        android:gravity="center"
+        android:text="New Chapter"
+        android:textColor="#252A31"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_below="@id/toolbar"></TextView>
+
+
+    <TextView
+        android:inputType="text"
+        android:id="@+id/dbTenTruyen"
+        android:hint="Story's name"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_basex2"
+        android:background="@drawable/edit_text_border"
+        android:layout_below="@id/tvNewChapter"/>
+
+    <EditText
+        android:id="@+id/dbChapter"
+        android:inputType="text"
+        android:hint="Chapter"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_border"
+        android:padding="@dimen/margin_basex2"
+        android:layout_below="@id/dbTenTruyen"/>
+
+    <EditText
+        android:inputType="textMultiLine"
+        android:id="@+id/dbnoidung"
+        android:hint="Content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_basex2"
+        android:background="@drawable/edit_text_border"
+        android:layout_below="@id/dbChapter"/>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>
