@@ -34,7 +34,6 @@ public class StoryAdapter extends ArrayAdapter<Story> {
 
         TextView tvName = (TextView) convertView.findViewById(R.id.name_story);
         TextView tvDesc = (TextView) convertView.findViewById(R.id.desc_story);
-        TextView tvUrl = (TextView) convertView.findViewById(R.id.imgurl);
         ImageView imgStory = (ImageView) convertView.findViewById(R.id.img_story);
         String desc = "";
 
@@ -52,7 +51,6 @@ public class StoryAdapter extends ArrayAdapter<Story> {
                 tvDesc.setText(story.getsDesc());
             }
         }
-//        tvUrl.setText(story.getsImage());
         Picasso.get().load(story.getsImage()).placeholder(R.drawable.ic_image).into(imgStory);
         return convertView;
     }

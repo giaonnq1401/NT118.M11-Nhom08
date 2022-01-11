@@ -8,10 +8,12 @@
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/edit_text_border.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/ic_library.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/ic_logomaga.xml" value="0.22291666666666668" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/ic_logomago.xml" value="0.1671875" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/ic_search.xml" value="0.24166666666666667" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/search_layout.xml" value="0.25833333333333336" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/drawable/vien.xml" value="0.25833333333333336" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_chapter.xml" value="0.23177083333333334" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_choose_story_update.xml" value="0.24954710144927536" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_container.xml" value="0.23697916666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_dang_bai.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_dangki.xml" value="0.2" />
@@ -20,8 +22,10 @@
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_noidung.xml" value="0.17291666666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile.xml" value="0.27447916666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.264" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_update_story.xml" value="0.24954710144927536" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_about_me.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_chapter.xml" value="0.1828125" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_choose_story_update.xml" value="0.24427083333333333" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_description.xml" value="0.16" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_library.xml" value="0.23697916666666666" />

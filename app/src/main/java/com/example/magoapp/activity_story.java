@@ -94,7 +94,7 @@ public class activity_story extends AppCompatActivity {
                     if (idStory.equals(ds.getKey())){
                         tv_storyName.setText(ds.child("sName").getValue(String.class));
                         tv_storyDesc.setText(ds.child("sDesc").getValue(String.class));
-                        Picasso.get().load(ds.child("sImage").getValue().toString()).fit().centerCrop().into(imageStory);
+                        Picasso.get().load(ds.child("sImage").getValue().toString()).into(imageStory);
                         authStory = ds.child("sAuthor").getValue(String.class);
 
                         mUserRef.addValueEventListener(new ValueEventListener() {

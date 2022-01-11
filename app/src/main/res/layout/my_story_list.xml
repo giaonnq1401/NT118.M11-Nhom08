@@ -33,17 +33,4 @@
         android:layout_marginRight="@dimen/margin_basex4"
         android:layout_marginTop="@dimen/margin_basex2"
         android:text="Description"
-        android:textSize="14sp"/>
-
-    <TextView
-        android:id="@+id/imgurl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/img_story"
-        android:layout_below="@id/desc_story"
-        android:layout_marginLeft="@dimen/margin_basex4"
-        android:layout_marginRight="@dimen/margin_basex4"
-        android:layout_marginTop="@dimen/margin_basex2"
-        android:text="Description"
-        android:textSize="14sp"/>
-</RelativeLayout>
+        android:textSize="14sp"/></RelativeLayout>

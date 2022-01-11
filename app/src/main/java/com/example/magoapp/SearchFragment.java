@@ -49,7 +49,7 @@ public class SearchFragment extends Fragment {
 
     private AutoCompleteTextView mSearchField;
     private ListView mResultList;
-    private String idStory, nameStory, desc;
+    private String idStory, nameStory, desc, image;
     List<String> keys = new ArrayList<>();
     private DatabaseReference mUserDatabase, mStoryDatabase;
 
@@ -173,7 +173,8 @@ public class SearchFragment extends Fragment {
                         keys.add(ds.getKey());
                         nameStory = ds.child("sName").getValue(String.class);
                         desc = ds.child("sDesc").getValue(String.class);
-                        Story newStory = new Story(nameStory, desc);
+                        image = ds.child("sImage").getValue(String.class);
+                        Story newStory = new Story(name, desc, image);
                         adapter.add(newStory);
                     }
 
