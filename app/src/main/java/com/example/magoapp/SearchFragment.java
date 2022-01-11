@@ -1,6 +1,7 @@
 package com.example.magoapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.magoapp.data.Story;
+import com.example.magoapp.data.StoryAdapter;
 import com.example.magoapp.data.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -35,6 +38,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +49,8 @@ public class SearchFragment extends Fragment {
 
     private AutoCompleteTextView mSearchField;
     private ListView mResultList;
-
+    private String idStory, nameStory, desc;
+    List<String> keys = new ArrayList<>();
     private DatabaseReference mUserDatabase, mStoryDatabase;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -116,15 +121,22 @@ public class SearchFragment extends Fragment {
 
             }
         };
-
-        //mUserDatabase.addListenerForSingleValueEvent(event);
         mStoryDatabase.addListenerForSingleValueEvent(event);
+
+        mResultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idStory = keys.get(position);
+                Intent intent = new Intent(getActivity(), activity_story.class);
+                intent.putExtra("idStory",idStory);
+                ((Container)getActivity()).startActivity(intent);
+            }
+        });
     }
 
     private void populateSearch(DataSnapshot snapshot) {
         ArrayList<String> names = new ArrayList<>();
         if (snapshot.exists()){
-
             for (DataSnapshot ds:snapshot.getChildren()){
                 String name = ds.child("sName").getValue(String.class);
                 names.add(name);
@@ -147,22 +159,23 @@ public class SearchFragment extends Fragment {
     }
 
     private void searchStory(String name) {
-
         Query query = mStoryDatabase.orderByChild("sName").equalTo(name);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                ArrayList<Story> arrayOfUsers = new ArrayList<Story>();
+
+                StoryAdapter adapter = new StoryAdapter(getActivity(), arrayOfUsers);
+                mResultList.setAdapter(adapter);
                 if (snapshot.exists()){
-
-                    ArrayList<String> listStory = new ArrayList<>();
                     for (DataSnapshot ds : snapshot.getChildren()) {
-                        String name = ds.child("sName").getValue(String.class);
-                        listStory.add(name);
+                        keys.add(ds.getKey());
+                        nameStory = ds.child("sName").getValue(String.class);
+                        desc = ds.child("sDesc").getValue(String.class);
+                        Story newStory = new Story(nameStory, desc);
+                        adapter.add(newStory);
                     }
-
-                    ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.list_layout, R.id.name_story, listStory);
-                    mResultList.setAdapter(adapter);
 
                 }else {
                     Log.d("Story", "no data found");
@@ -174,24 +187,6 @@ public class SearchFragment extends Fragment {
 
             }
         });
-    }
-
-    class Story{
-
-        public Story(String sName, String sAuthor) {
-            this.sName = sName;
-            this.sAuthor = sAuthor;
-        }
-
-        public String getsName() {
-            return sName;
-        }
-
-        public String getsAuthor() {
-            return sAuthor;
-        }
-
-        public String sName, sAuthor;
     }
 
 }

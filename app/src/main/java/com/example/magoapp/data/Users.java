@@ -1,7 +1,7 @@
 package com.example.magoapp.data;
 
 public class Users {
-    private String nameUser, emailUser, DoBUser;
+    private String nameUser, emailUser, DoBUser, mImageUrl;
 
     public Users(){}
 
@@ -9,6 +9,25 @@ public class Users {
         this.nameUser = nameUser;
         this.emailUser = emailUser;
         this.DoBUser = doBUser;
+    }
+
+    public Users(String nameUser, String emailUser, String doBUser, String mImageUrl) {
+        this.nameUser = nameUser;
+        this.emailUser = emailUser;
+        DoBUser = doBUser;
+        this.mImageUrl = mImageUrl;
+    }
+
+    public Users(String mImageUrl) {
+        this.mImageUrl = mImageUrl;
+    }
+
+    public String getmImageUrl() {
+        return mImageUrl;
+    }
+
+    public void setmImageUrl(String mImageUrl) {
+        this.mImageUrl = mImageUrl;
     }
 
     public String getNameUser() {

@@ -3,24 +3,26 @@ package com.example.magoapp.data;
 import kotlinx.coroutines.Job;
 
 public class Story {
-    private String sName, sAuthor, sTopic, sDesc;
-    private Chapter sChapter;
+    private String sName, sAuthor, sImage, sDesc;
 
     public Story(){}
 
-    public Story(String sName, String sAuthor, String sDesc, Chapter sChapter) {
+    public Story(String sName, String sAuthor, String sDesc, String sImage) {
         this.sName = sName;
         this.sAuthor = sAuthor;
+        this.sImage = sImage;
         this.sDesc = sDesc;
-        this.sChapter = sChapter;
     }
 
-    public Chapter getsChapter() {
-        return sChapter;
+    public Story(String sName, String sDesc, String sImage) {
+        this.sName = sName;
+        this.sImage = sImage;
+        this.sDesc = sDesc;
     }
 
-    public void setsChapter(Chapter sChapter) {
-        this.sChapter = sChapter;
+    public Story(String sName, String sDesc) {
+        this.sName = sName;
+        this.sDesc = sDesc;
     }
 
     public String getsName() {
@@ -45,5 +47,13 @@ public class Story {
 
     public void setsDesc(String sDesc) {
         this.sDesc = sDesc;
+    }
+
+    public String getsImage() {
+        return sImage;
+    }
+
+    public void setsImage(String sImage) {
+        this.sImage = sImage;
     }
 }

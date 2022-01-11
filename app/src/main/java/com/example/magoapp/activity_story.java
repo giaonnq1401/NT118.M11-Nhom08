@@ -1,69 +1,89 @@
 package com.example.magoapp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.magoapp.data.Library;
+import com.example.magoapp.data.Story;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class activity_story extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    TextView tv_storyName, tv_storyAuth;
+    TextView tv_storyName, tv_storyAuth, tv_storyDesc;
+    ImageView imageStory;
+    Button btn_Read, btn_Save;
 
     String idStory, authStory;
 
-    DatabaseReference mStoryRef, mUserRef;
+    DatabaseReference mStoryRef, mUserRef, mLibraryRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
 
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Description"));
-        tabLayout.addTab(tabLayout.newTab().setText("Chapter"));
-
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        final StoryAdapter adapter = new StoryAdapter(this,getSupportFragmentManager(),
-                tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
+        Intent intentGet = getIntent();
+        idStory = intentGet.getStringExtra("idStory");
 
         tv_storyName = (TextView) findViewById(R.id.story_name);
         tv_storyAuth = (TextView) findViewById(R.id.story_author);
+        tv_storyDesc = (TextView) findViewById(R.id.storyDesc);
+        btn_Read = (Button) findViewById(R.id.btnRead);
+        btn_Save = (Button) findViewById(R.id.btn_savetolibrary);
+        imageStory = (ImageView) findViewById(R.id.story_image);
 
         mStoryRef = FirebaseDatabase.getInstance().getReference("Story");
         mUserRef = FirebaseDatabase.getInstance().getReference("Users");
-
-        Intent intent = getIntent();
-        idStory = intent.getStringExtra("idStory");
+        mLibraryRef = FirebaseDatabase.getInstance().getReference("Library");
 
         getStory();
+
+        btn_Read.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity_story.this, Chapter.class);
+                intent.putExtra("idStory",idStory);
+                startActivity(intent);
+            }
+        });
+
+        btn_Save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveStory();
+            }
+        });
+
+    }
+
+    private void saveStory() {
+            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            Library library = new Library(idStory, idUser);
+            mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                    Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
+                }
+            });
     }
 
     private void getStory(){
@@ -73,6 +93,8 @@ public class activity_story extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     if (idStory.equals(ds.getKey())){
                         tv_storyName.setText(ds.child("sName").getValue(String.class));
+                        tv_storyDesc.setText(ds.child("sDesc").getValue(String.class));
+                        Picasso.get().load(ds.child("sImage").getValue().toString()).fit().centerCrop().into(imageStory);
                         authStory = ds.child("sAuthor").getValue(String.class);
 
                         mUserRef.addValueEventListener(new ValueEventListener() {
