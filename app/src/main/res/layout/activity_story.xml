@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,12 +8,11 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:padding="20dp"
-        android:background="@drawable/story_background"
-
-        >
+        android:background="@drawable/story_background">
 
         <ImageView
             android:id="@+id/story_image"
@@ -71,33 +70,46 @@
             android:id="@+id/btn_savetolibrary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/story_name"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="100dp"
-            android:text="Lưu vào thư viện"
-            android:fontFamily="@font/montserratregular"
-            android:backgroundTint="@color/centerColor"
-            android:textColor="@color/white"
             android:layout_toRightOf="@+id/story_image"
-            android:layout_below="@+id/story_name"
-            />
+            android:backgroundTint="@color/centerColor"
+            android:fontFamily="@font/montserratregular"
+            android:text="Save to library"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_below="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_basex4"
+        android:orientation="vertical">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
+            android:layout_height="match_parent"
+            android:text="Description"
+            android:textSize="22sp"
+            android:fontFamily="@font/montserratsemibold"/>
+        <TextView
+            android:id="@+id/storyDesc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Description"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserratregular"
+            android:layout_marginLeft="@dimen/margin_basex2"/>
+    </LinearLayout>
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tabLayout"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
-            tools:layout_editor_absoluteX="8dp" />
-    </RelativeLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/btnRead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/centerColor"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_basex4"
+        android:text="read now"/>
+
+</RelativeLayout>

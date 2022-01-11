@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.magoapp.data.Story;
+import com.example.magoapp.data.StoryAdapter;
 import com.example.magoapp.data.Users;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -43,8 +45,9 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private ListView lvStory;
-    private String idStory, name, desc;
+    private String idStory, name, desc, image;
     List<String> keys = new ArrayList<>();
+
 
     DatabaseReference mRef;
     // instance for firebase storage and StorageReference
@@ -56,7 +59,6 @@ public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -64,15 +66,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -132,28 +125,23 @@ public class HomeFragment extends Fragment {
         });
 
         storageRef = FirebaseStorage.getInstance().getReference();
-        profileRef = storageRef.child("story/" + mRef.getKey() + "/avatar.jpg");
 
     }
 
-
     private void libStory(DataSnapshot snapshot) {
-        ArrayList<String> storylist_name = new ArrayList<>();
-//        ArrayList<String> storylist_desc = new ArrayList<>();
-        if (snapshot.exists()) {
+        ArrayList<Story> array = new ArrayList<Story>();
 
+        StoryAdapter adapter = new StoryAdapter(getActivity(), array);
+        lvStory.setAdapter(adapter);
+        if (snapshot.exists()) {
             for (DataSnapshot ds : snapshot.getChildren()) {
                 keys.add(ds.getKey());
                 name = ds.child("sName").getValue(String.class);
-                storylist_name.add(name);
-//                desc = ds.child("sDesc").getValue(String.class);
-//                storylist_desc.add(desc);
+                desc = ds.child("sDesc").getValue(String.class);
+                image = ds.child("sImage").getValue(String.class);
+                Story newStory = new Story(name, desc, image);
+                adapter.add(newStory);
             }
-
-            ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist_name);
-            lvStory.setAdapter(adapter);
-//            ArrayAdapter desc_adap = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.desc_story, storylist_desc);
-//            lvStory.setAdapter(desc_adap);
         }
     }
 

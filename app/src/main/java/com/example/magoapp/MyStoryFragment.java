@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.magoapp.data.Story;
+import com.example.magoapp.data.StoryAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -28,6 +30,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,7 +43,8 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
     TextView tvAddStory, tvUpdateStory;
     Boolean isAllFabsVisible;
     ListView lvMyStory;
-    ArrayAdapter<String> arrayAdapter;
+    private String idStory, name, desc;
+    List<String> keys = new ArrayList<>();
 
     private DatabaseReference mRef;
 
@@ -57,15 +61,6 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyStoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static MyStoryFragment newInstance(String param1, String param2) {
         MyStoryFragment fragment = new MyStoryFragment();
         Bundle args = new Bundle();
@@ -137,23 +132,35 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
             }
         };
         mRef.addListenerForSingleValueEvent(event);
+
+        lvMyStory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                idStory = keys.get(position);
+                Intent intent = new Intent(getActivity(), activity_story.class);
+                intent.putExtra("idStory",idStory);
+                ((Profile)getActivity()).startActivity(intent);
+            }
+        });
     }
 
     private void myStory(DataSnapshot snapshot) {
-        ArrayList<String> storylist = new ArrayList<>();
+        ArrayList<Story> arrayOfUsers = new ArrayList<Story>();
+
+        StoryAdapter adapter = new StoryAdapter(getActivity(), arrayOfUsers);
+        lvMyStory.setAdapter(adapter);
         Query query = mRef.orderByChild("sAuthor").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-
                     for (DataSnapshot ds : snapshot.getChildren()) {
-
-                        String name = ds.child("sName").getValue(String.class);
-                        storylist.add(name);
+                        keys.add(ds.getKey());
+                        name = ds.child("sName").getValue(String.class);
+                        desc = ds.child("sDesc").getValue(String.class);
+                        Story newStory = new Story(name, desc);
+                        adapter.add(newStory);
                     }
-                    ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.my_story_list, R.id.name_story, storylist);
-                    lvMyStory.setAdapter(adapter);
 
                 }
             }
