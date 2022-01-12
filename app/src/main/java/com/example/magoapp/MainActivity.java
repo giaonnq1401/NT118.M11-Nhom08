@@ -11,6 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     private static int SPLASH_SCREEN = 5000;
@@ -44,11 +47,19 @@ public class MainActivity extends AppCompatActivity {
 
         new Handler().postDelayed(new Runnable() {
             @Override
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, dangnhap.class);
-                startActivity(intent);
-                finish();
-            }
+            public void run() {nextActivity();}
         }, SPLASH_SCREEN);
+    }
+    private void nextActivity(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null){
+            Intent intent = new Intent(MainActivity.this, dangnhap.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(MainActivity.this, Container.class);
+            startActivity(intent);
+        }
+        finish();
     }
 }

@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.magoapp.data.Library;
+import com.example.magoapp.data.Reading;
 import com.example.magoapp.data.Story;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +36,7 @@ public class activity_story extends AppCompatActivity {
 
     String idStory, authStory;
 
-    DatabaseReference mStoryRef, mUserRef, mLibraryRef;
+    DatabaseReference mStoryRef, mUserRef, mLibraryRef, mReadingRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +53,19 @@ public class activity_story extends AppCompatActivity {
         btn_Save = (Button) findViewById(R.id.btn_savetolibrary);
         imageStory = (ImageView) findViewById(R.id.story_image);
 
+        tv_storyDesc.setMovementMethod( new ScrollingMovementMethod());
+
         mStoryRef = FirebaseDatabase.getInstance().getReference("Story");
         mUserRef = FirebaseDatabase.getInstance().getReference("Users");
         mLibraryRef = FirebaseDatabase.getInstance().getReference("Library");
+        mReadingRef = FirebaseDatabase.getInstance().getReference("Reading");
 
         getStory();
 
         btn_Read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                readingStory();
                 Intent intent = new Intent(activity_story.this, Chapter.class);
                 intent.putExtra("idStory",idStory);
                 startActivity(intent);
@@ -73,6 +79,16 @@ public class activity_story extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void readingStory() {
+        String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Reading reading = new Reading(idStory, idUser);
+        mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+            }
+        });
     }
 
     private void saveStory() {

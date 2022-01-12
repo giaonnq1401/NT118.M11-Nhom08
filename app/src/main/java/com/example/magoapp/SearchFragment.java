@@ -165,7 +165,6 @@ public class SearchFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 ArrayList<Story> arrayOfUsers = new ArrayList<Story>();
-
                 StoryAdapter adapter = new StoryAdapter(getActivity(), arrayOfUsers);
                 mResultList.setAdapter(adapter);
                 if (snapshot.exists()){

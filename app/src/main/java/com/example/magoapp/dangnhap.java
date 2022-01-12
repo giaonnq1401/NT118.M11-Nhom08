@@ -25,7 +25,7 @@ public class dangnhap extends AppCompatActivity implements View.OnClickListener 
     private Button btnLogin;
     private TextView register;
     private EditText editTextEmail, editTextPassword;
-    private CheckBox rememberMe;
+    private CheckBox showPass;
 
     private FirebaseAuth mAuth;
 
@@ -33,15 +33,6 @@ public class dangnhap extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap);
-
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        String checkbox = preferences.getString("remember", "");
-        if (checkbox.equals("true")){
-            Intent intent = new Intent(dangnhap.this, Container.class);
-            startActivity(intent);
-        }else if (checkbox.equals("false")){
-            Toast.makeText(this, "Please Sign in", Toast.LENGTH_SHORT).show();
-        }
 
         //Register
         register = (TextView) findViewById(R.id.register);
@@ -54,28 +45,7 @@ public class dangnhap extends AppCompatActivity implements View.OnClickListener 
         editTextEmail = (EditText) findViewById(R.id.email_input);
         editTextPassword = (EditText) findViewById(R.id.pass_input);
 
-        rememberMe = (CheckBox) findViewById(R.id.cbRemember);
-        rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (compoundButton.isChecked()){
-
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "true");
-                    editor.apply();
-                    Toast.makeText(dangnhap.this, "Checked", Toast.LENGTH_SHORT).show();
-
-                } else if (!compoundButton.isChecked()){
-
-                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember", "false");
-                    editor.apply();
-                    Toast.makeText(dangnhap.this, "Unchecked", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        showPass = (CheckBox) findViewById(R.id.cbShowPwd);
 
         mAuth = FirebaseAuth.getInstance();
     }

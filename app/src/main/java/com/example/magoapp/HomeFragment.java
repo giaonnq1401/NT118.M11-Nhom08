@@ -125,12 +125,10 @@ public class HomeFragment extends Fragment {
         });
 
         storageRef = FirebaseStorage.getInstance().getReference();
-
     }
 
     private void libStory(DataSnapshot snapshot) {
         ArrayList<Story> array = new ArrayList<Story>();
-
         StoryAdapter adapter = new StoryAdapter(getActivity(), array);
         lvStory.setAdapter(adapter);
         if (snapshot.exists()) {

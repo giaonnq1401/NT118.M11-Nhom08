@@ -11,8 +11,8 @@
         android:id="@+id/header_title"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:padding="20dp"
-        android:background="@drawable/story_background">
+        android:background="@drawable/story_background"
+        android:padding="20dp">
 
         <ImageView
             android:id="@+id/story_image"
@@ -29,20 +29,20 @@
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@id/story_image"
             android:fontFamily="@font/montserratsemibold"
-            android:text="Tên truyện"
+            android:text="Story's name"
             android:textColor="@color/textColor"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/story_author"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/story_name"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/story_image"
             android:fontFamily="@font/montserratregular"
-            android:text="Tên tác giả"
+            android:text="Author"
             android:textSize="17sp" />
 
 
@@ -60,56 +60,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/story_author"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/ic_like"
-            android:text="123"
+            android:text="0"
             android:textSize="17dp" />
 
         <Button
             android:id="@+id/btn_savetolibrary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/story_name"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="100dp"
-            android:layout_toRightOf="@+id/story_image"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
             android:backgroundTint="@color/centerColor"
             android:fontFamily="@font/montserratregular"
             android:text="Save to library"
             android:textColor="@color/white" />
+
     </RelativeLayout>
 
-    <LinearLayout
-        android:layout_below="@+id/header_title"
-        android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:id="@+id/ll"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_basex4"
-        android:orientation="vertical">
+        android:layout_below="@+id/header_title"
+        android:layout_margin="@dimen/margin_basex4">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratsemibold"
             android:text="Description"
-            android:textSize="22sp"
-            android:fontFamily="@font/montserratsemibold"/>
+            android:textSize="25sp" />
+
         <TextView
             android:id="@+id/storyDesc"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Description"
-            android:textSize="18sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv"
+            android:layout_marginTop="@dimen/margin_basex2"
             android:fontFamily="@font/montserratregular"
-            android:layout_marginLeft="@dimen/margin_basex2"/>
-    </LinearLayout>
+            android:text="Description"
+            android:maxHeight="320dp"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnRead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/centerColor"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/margin_basex4"
-        android:text="read now"/>
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_basex4"
+        android:backgroundTint="@color/centerColor"
+        android:fontFamily="@font/montserratsemibold"
+        android:text="READ NOW" />
 
 </RelativeLayout>

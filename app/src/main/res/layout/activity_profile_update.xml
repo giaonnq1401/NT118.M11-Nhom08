@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileUpdate"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/margin_basex4"
+        android:fontFamily="@font/montserratsemibold"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_basex4"
+        android:orientation="vertical"
+        android:layout_below="@id/tv_title">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="User Name"
+            android:layout_marginBottom="@dimen/margin_basex2"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/color1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mago"
+                android:drawableLeft="@drawable/ic_user"
+                android:drawablePadding="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratsemibold"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Birthday"
+            android:layout_marginBottom="@dimen/margin_basex2"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/color1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1/1/2001"
+                android:drawableLeft="@drawable/ic_birthday"
+                android:drawablePadding="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratsemibold"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Hobbies"
+            android:layout_marginBottom="@dimen/margin_basex2"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/color1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/hobbies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="mago"
+                android:drawableLeft="@drawable/ic_hobbies"
+                android:drawablePadding="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratsemibold"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/montserratsemibold"
+        android:textColor="@color/endColor"
+        android:text="Update" />
+</RelativeLayout>
