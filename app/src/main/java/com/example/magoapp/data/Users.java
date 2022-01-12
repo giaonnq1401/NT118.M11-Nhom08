@@ -1,5 +1,10 @@
 package com.example.magoapp.data;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Users {
     private String nameUser, emailUser, DoBUser, mImageUrl;
     private String zodiac, hobbies, quotes;
@@ -22,11 +27,25 @@ public class Users {
         this.quotes = quotes;
     }
 
-    public Users(String nameUser, String emailUser, String doBUser, String mImageUrl) {
+    public Users(String nameUser, String doBUser, String mImageUrl, String zodiac, String hobbies, String quotes) {
         this.nameUser = nameUser;
-        this.emailUser = emailUser;
         DoBUser = doBUser;
         this.mImageUrl = mImageUrl;
+        this.zodiac = zodiac;
+        this.hobbies = hobbies;
+        this.quotes = quotes;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("nameUser", nameUser);
+        result.put("doBUser", DoBUser);
+        result.put("mImageUrl", mImageUrl);
+        result.put("zodiac", zodiac);
+        result.put("hobbies", hobbies);
+        result.put("quotes", quotes);
+        return result;
     }
 
     public Users(String mImageUrl) {

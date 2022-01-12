@@ -67,7 +67,6 @@ public class activity_DangBai extends AppCompatActivity {
         mRef = database.getReference("Story");
 //        fStore = FirebaseStorage.getInstance();
         storageRef = FirebaseStorage.getInstance().getReference("Story");
-        StorageReference profileRef = storageRef.child(mRef.getKey() + "/avatar.jpg");
         mChapterRef = database.getReference("Chapter");
 
         img_story.setOnClickListener(new View.OnClickListener() {
