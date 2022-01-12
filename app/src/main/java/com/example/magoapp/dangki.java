@@ -46,13 +46,6 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         mAuth = FirebaseAuth.getInstance();
 
         editdate = (EditText) findViewById(R.id.bd_signup);
-//        editdate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                chonngay();
-//            }
-//        });
-
         regUsername = (EditText) findViewById(R.id.username_signup);
         regEmail = (EditText) findViewById(R.id.email_signup);
         regPwd = (EditText) findViewById(R.id.password_signup);
@@ -104,6 +97,10 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         String password = regPwd.getText().toString().trim();
         String passConfirm = pwdConfirm.getText().toString().trim();
         String birthday = editdate.getText().toString().trim();
+        String mImageUrl = "";
+        String zodiac = "";
+        String hobbies = "";
+        String quotes = "";
 
         if (username.isEmpty()){
             regUsername.setError("Username is required!");
@@ -153,7 +150,7 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()){
-                    Users user = new Users(username, email, birthday);
+                    Users user = new Users(username, email, birthday, mImageUrl, zodiac, hobbies, quotes);
 
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getUid())
