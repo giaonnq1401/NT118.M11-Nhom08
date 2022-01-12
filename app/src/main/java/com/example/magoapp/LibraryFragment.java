@@ -98,7 +98,7 @@ public class LibraryFragment extends Fragment {
                 ((Container)getActivity()).startActivity(intent);
             }
         });
-//        readingStory();
+        readingStory();
         libStory();
     }
 
@@ -116,11 +116,11 @@ public class LibraryFragment extends Fragment {
                         mStoryRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot ds : snapshot.getChildren()){
-                                    if (idReading.equals(ds.getKey())){
-                                        name = ds.child("sName").getValue(String.class);
-                                        desc = ds.child("sDesc").getValue(String.class);
-                                        image = ds.child("sImage").getValue(String.class);
+                                for (DataSnapshot dsnap : snapshot.getChildren()){
+                                    if (ds.child("idStory").getValue(String.class).equals(dsnap.getKey())){
+                                        name = dsnap.child("sName").getValue(String.class);
+                                        desc = dsnap.child("sDesc").getValue(String.class);
+                                        image = dsnap.child("sImage").getValue(String.class);
                                         Story newStory = new Story(name, desc, image);
                                         adapter.add(newStory);
                                     }
@@ -157,12 +157,12 @@ public class LibraryFragment extends Fragment {
                         mStoryRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for (DataSnapshot ds : snapshot.getChildren()){
-                                    if (idStory.equals(ds.getKey())){
-                                        keys.add(ds.getKey());
-                                        name = ds.child("sName").getValue(String.class);
-                                        desc = ds.child("sDesc").getValue(String.class);
-                                        image = ds.child("sImage").getValue(String.class);
+                                for (DataSnapshot dsnap : snapshot.getChildren()){
+                                    if ((ds.child("idStory").getValue(String.class)).equals(dsnap.getKey())){
+                                        keys.add(dsnap.getKey());
+                                        name = dsnap.child("sName").getValue(String.class);
+                                        desc = dsnap.child("sDesc").getValue(String.class);
+                                        image = dsnap.child("sImage").getValue(String.class);
                                         Story newStory = new Story(name, desc, image);
                                         adapter.add(newStory);
                                     }

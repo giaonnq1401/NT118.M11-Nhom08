@@ -19,13 +19,22 @@
         android:fontFamily="@font/montserratsemibold"
         android:textColor="@color/black"/>
 
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_basex4"
+        app:srcCompat="@drawable/user__2_" />
+
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_basex4"
         android:orientation="vertical"
-        android:layout_below="@id/tv_title">
+        android:layout_below="@id/profile_image">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -66,6 +75,24 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Zodiac"
+            android:layout_marginBottom="@dimen/margin_basex2"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/color1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/zodiac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Capricon"
+                android:drawableLeft="@drawable/ic_hobbies"
+                android:drawablePadding="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratsemibold"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:hint="Hobbies"
             android:layout_marginBottom="@dimen/margin_basex2"
             app:boxBackgroundMode="outline"
@@ -75,12 +102,29 @@
                 android:id="@+id/hobbies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="mago"
+                android:text="Traveling"
                 android:drawableLeft="@drawable/ic_hobbies"
                 android:drawablePadding="@dimen/margin_basex2"
                 android:fontFamily="@font/montserratsemibold"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quotes"
+            android:layout_marginBottom="@dimen/margin_basex2"
+            app:boxBackgroundMode="outline"
+            app:boxBackgroundColor="@color/color1">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="If you're explaining, you're losing"
+                android:drawableLeft="@drawable/ic_hobbies"
+                android:drawablePadding="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratsemibold"/>
+        </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <Button

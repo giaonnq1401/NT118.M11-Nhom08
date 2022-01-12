@@ -159,11 +159,6 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 startActivity(new Intent(this, dangnhap.class));
                 break;
             }
-            case R.id.profile_image: {
-                openFileChooser();
-                uploadFile();
-                break;
-            }
         }
 
     }
@@ -210,10 +205,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                     taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-
-                            DatabaseReference user;
-                            user= mRef.child(currentuser);
-                            user.child("mImageUrl").setValue(uri.toString(), new DatabaseReference.CompletionListener() {
+                            Users users = new Users(uri.toString());
+                            mRef.push().setValue(users, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                                 }
@@ -236,6 +229,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
                 public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                     double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                     progressBar.setProgress((int) progress);
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             });
         } else {
