@@ -181,32 +181,19 @@ public class MyStoryFragment extends Fragment implements View.OnClickListener{
             case R.id.fabAdd:
             {
                 if (!isAllFabsVisible) {
-
-                    // when isAllFabsVisible becomes
-                    // true make all the action name
-                    // texts and FABs VISIBLE.
                     fabStory.show();
                     fabChaper.show();
                     tvAddStory.setVisibility(View.VISIBLE);
                     tvUpdateStory.setVisibility(View.VISIBLE);
 
-                    // make the boolean variable true as
-                    // we have set the sub FABs
-                    // visibility to GONE
                     isAllFabsVisible = true;
                 } else {
 
-                    // when isAllFabsVisible becomes
-                    // true make all the action name
-                    // texts and FABs GONE.
                     fabStory.hide();
                     fabChaper.hide();
                     tvAddStory.setVisibility(View.GONE);
                     tvUpdateStory.setVisibility(View.GONE);
 
-                    // make the boolean variable false
-                    // as we have set the sub FABs
-                    // visibility to GONE
                     isAllFabsVisible = false;
                 }
                 break;

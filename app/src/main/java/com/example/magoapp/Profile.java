@@ -7,8 +7,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,13 +20,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.magoapp.data.Chapter;
+import com.example.magoapp.data.Story;
 import com.example.magoapp.data.Users;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +45,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -46,13 +56,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Profile extends AppCompatActivity implements View.OnClickListener{
+public class Profile extends AppCompatActivity implements View.OnClickListener {
 
     TabLayout tabLayout;
     ViewPager viewPager;
     private TextView tv_userName;
     private ImageView imgAva;
     private ProgressBar progressBar;
+    private String currentuser;
 
     private Uri mImageUri;
     private final int PICK_IMAGE_REQUEST = 1;
@@ -60,7 +71,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
     private StorageReference storageRef;
     private DatabaseReference mRef;
 
-    private ImageView back, setting;
+    private ImageView back, edit, signout;
 
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -76,7 +87,7 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         tabLayout.addTab(tabLayout.newTab().setText("My Story"));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        final ProfileAdapter adapter = new ProfileAdapter(this,getSupportFragmentManager(),
+        final ProfileAdapter adapter = new ProfileAdapter(this, getSupportFragmentManager(),
                 tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -85,9 +96,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -102,20 +115,23 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         mRef = FirebaseDatabase.getInstance().getReference("Users");
 
         back = (ImageView) findViewById(R.id.back);
-        setting = (ImageView)findViewById(R.id.setting);
+        edit = (ImageView) findViewById(R.id.edit);
+        signout = (ImageView) findViewById(R.id.signout);
         back.setOnClickListener(this);
-        setting.setOnClickListener(this);
+        edit.setOnClickListener(this);
+        signout.setOnClickListener(this);
 
         tv_userName = (TextView) findViewById(R.id.user_name);
         getInfo();
+
     }
 
     private void getInfo() {
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    if (currentUser.equals(ds.getKey())){
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (currentUser.equals(ds.getKey())) {
                         tv_userName.setText(ds.child("nameUser").getValue(String.class));
                     }
                 }
@@ -128,145 +144,102 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         });
     }
 
-//    // Select Image method
-//    private void changeProfileImage()
-//    {
-//
-//        // Defining Implicit Intent to mobile gallery
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(
-//                Intent.createChooser(
-//                        intent,
-//                        "Select Image from here..."),
-//                PICK_IMAGE_REQUEST);
-//    }
-//
-//    // Override onActivityResult method
-//    @Override
-//    protected void onActivityResult(int requestCode,
-//                                    int resultCode,
-//                                    Intent data)
-//    {
-//
-//        super.onActivityResult(requestCode,
-//                resultCode,
-//                data);
-//
-//        // checking request code and result code
-//        // if request code is PICK_IMAGE_REQUEST and
-//        // resultCode is RESULT_OK
-//        // then set image in the image view
-//        if (requestCode == PICK_IMAGE_REQUEST
-//                && resultCode == RESULT_OK
-//                && data != null
-//                && data.getData() != null) {
-//
-//            // Get the Uri of data
-//            filePath = data.getData();
-//            try {
-//
-//                // Setting image on image view using Bitmap
-//                Bitmap bitmap = MediaStore
-//                        .Images
-//                        .Media
-//                        .getBitmap(
-//                                getContentResolver(),
-//                                filePath);
-//                imgAva.setImageBitmap(bitmap);
-//            }
-//
-//            catch (IOException e) {
-//                // Log the exception
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back:
                 startActivity(new Intent(this, Container.class));
                 break;
-            case R.id.setting:
-                startActivity(new Intent(this, SettingActivity.class));
+            case R.id.edit: {
+                startActivity(new Intent(this, ProfileUpdate.class));
                 break;
-            case R.id.profile_image:
-            {
-//                changeProfileImage();
-//                openFileChooser();
-//                uploadFile();
+            }
+            case R.id.signout: {
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(this, dangnhap.class));
+                break;
+            }
+            case R.id.profile_image: {
+                openFileChooser();
+                uploadFile();
                 break;
             }
         }
 
     }
 
-//    private void openFileChooser() {
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-//            mImageUri = data.getData();
-//            Picasso.get().load(mImageUri).into(imgAva);
-//        }
-//    }
-//
-//    private String getFileExtension(Uri uri){
-//        ContentResolver cR = getContentResolver();
-//        MimeTypeMap mime = MimeTypeMap.getSingleton();
-//        return mime.getExtensionFromMimeType(cR.getType(uri));
-//    }
-//    private void uploadFile() {
-//        if (mImageUri != null){
-//            StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
-//
-//            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                    Handler handler = new Handler();
-//                    handler.postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            progressBar.setProgress(0);
-//                        }
-//                    }, 5000);
-//
-//                    Toast.makeText(Profile.this, "Upload Successful", Toast.LENGTH_LONG).show();
-//                    String imgUrl = taskSnapshot.getUploadSessionUri().toString();
-//                    HashMap <String,Object> user =new HashMap<>();
-//                    user.put("mImageUrl", imgUrl);
-//                    mRef.child(currentUser).updateChildren(user, new DatabaseReference.CompletionListener() {
-//                        @Override
-//                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                            Toast.makeText(Profile.this, "Update avatar successful", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception e) {
-//                    Toast.makeText(Profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                @Override
-//                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-//                    progressBar.setProgress((int)progress);
-//                }
-//            });
-//        }else {
-//            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+            Picasso.get().load(mImageUri).into(imgAva);
+        }
+    }
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void uploadFile() {
+        if (mImageUri != null) {
+            StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+
+            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressBar.setProgress(0);
+                        }
+                    }, 5000);
+
+                    Toast.makeText(Profile.this, "Upload Successful", Toast.LENGTH_LONG).show();
+                    taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            DatabaseReference user;
+                            user= mRef.child(currentuser);
+                            user.child("mImageUrl").setValue(uri.toString(), new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                }
+                            });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle any errors
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(Profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                    progressBar.setProgress((int) progress);
+                }
+            });
+        } else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

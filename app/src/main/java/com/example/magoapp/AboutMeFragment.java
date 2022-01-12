@@ -83,7 +83,7 @@ public class AboutMeFragment extends Fragment {
         ed_birthday = (TextInputEditText) getView().findViewById(R.id.birthday);
 
         mRef = FirebaseDatabase.getInstance().getReference("Users");
-        getInfo();
+//        getInfo();
     }
 
     private void getInfo() {

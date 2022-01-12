@@ -1,79 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".AboutMeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/zodiac"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/margin_basex4"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/margin_basex2">
+        <TextView
+            android:id="@+id/tvZodiac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratsemibold"
+            android:textSize="20sp"
+            android:text="Zodiac:"/>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="User Name"
-            android:layout_marginBottom="@dimen/margin_basex2"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/color1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="mago"
-                android:drawableLeft="@drawable/ic_user"
-                android:drawablePadding="@dimen/margin_basex2"
-                android:fontFamily="@font/montserratsemibold"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Birthday"
-            android:layout_marginBottom="@dimen/margin_basex2"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/color1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/birthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="1/1/2001"
-                android:drawableLeft="@drawable/ic_birthday"
-                android:drawablePadding="@dimen/margin_basex2"
-                android:fontFamily="@font/montserratsemibold"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Hobbies"
-            android:layout_marginBottom="@dimen/margin_basex2"
-            app:boxBackgroundMode="outline"
-            app:boxBackgroundColor="@color/color1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/hobbies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="mago"
-                android:drawableLeft="@drawable/ic_hobbies"
-                android:drawablePadding="@dimen/margin_basex2"
-                android:fontFamily="@font/montserratsemibold"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update"
+            android:layout_toEndOf="@id/tvZodiac"
+            android:layout_marginLeft="@dimen/margin_basex4"
             android:fontFamily="@font/montserratregular"
-            android:backgroundTint="@color/centerColor" />
-    </LinearLayout>
+            android:textSize="20sp"/>
+    </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/hobbies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/zodiac"
+        android:layout_margin="@dimen/margin_basex2">
+    <TextView
+        android:id="@+id/tvHobbies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserratsemibold"
+        android:textSize="20sp"
+        android:text="Hobbies: "/>
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvHobbies"
+            android:layout_marginLeft="@dimen/margin_basex4"
+            android:fontFamily="@font/montserratregular"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/quotes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hobbies"
+        android:layout_margin="@dimen/margin_basex2">
+
+        <TextView
+            android:id="@+id/tvQuotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserratsemibold"
+            android:textSize="20sp"
+            android:text="Quotes: "/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/tvQuotes"
+            android:layout_marginLeft="@dimen/margin_basex4"
+            android:fontFamily="@font/montserratregular"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/social"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+    </RelativeLayout>
+</RelativeLayout>

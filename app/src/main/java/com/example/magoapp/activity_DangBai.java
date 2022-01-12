@@ -104,13 +104,14 @@ public class activity_DangBai extends AppCompatActivity {
         }
     }
 
-    private String getFileExtension(Uri uri){
+    private String getFileExtension(Uri uri) {
         ContentResolver cR = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
+
     private void uploadFile() {
-        if (mImageUri != null){
+        if (mImageUri != null) {
             StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
 
             fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -125,7 +126,6 @@ public class activity_DangBai extends AppCompatActivity {
                     }, 5000);
 
                     Toast.makeText(activity_DangBai.this, "Upload Successful", Toast.LENGTH_LONG).show();
-
 
                     nameStory = ed_nameStory.getText().toString().trim();
                     descStory = ed_descStory.getText().toString().trim();
@@ -168,93 +168,11 @@ public class activity_DangBai extends AppCompatActivity {
                 @Override
                 public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                     double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-                    progressBar.setProgress((int)progress);
+                    progressBar.setProgress((int) progress);
                 }
             });
-        }else {
+        } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
     }
-
-//    // Select Image method
-//    private void SelectImage()
-//    {
-//        // Defining Implicit Intent to mobile gallery
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Image from here..."),PICK_IMAGE_REQUEST);
-//    }
-//
-//    // Override onActivityResult method
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // checking request code and result code
-//        // if request code is PICK_IMAGE_REQUEST and
-//        // resultCode is RESULT_OK
-//        // then set image in the image view
-//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-//            // Get the Uri of data
-//            filePath = data.getData();
-//            try {
-//                // Setting image on image view using Bitmap
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),filePath);
-//                img_story.setImageBitmap(bitmap);
-//            }
-//
-//            catch (IOException e) {
-//                // Log the exception
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    private void uploadImageToFirebase(Uri filePath, String idStory) {
-//        //upload image to Firebase Storage
-//        final StorageReference fileRef = storageRef.child(idStory + "/avatar.jpg");
-//        fileRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Toast.makeText(activity_DangBai.this, "Image Uploaded", Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(activity_DangBai.this, "Failed", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//
-//    private void onClickPushData(){
-//        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//
-//        String nameStory = ed_nameStory.getText().toString().trim();
-//        String descStory = ed_descStory.getText().toString().trim();
-//        String imgStory="";
-//        String nameChapter = ed_nameChapter.getText().toString().trim();
-//        String contentChapter = ed_contentChapter.getText().toString().trim();
-//
-//        Story story = new Story(nameStory, currentuser, descStory, imgStory);
-//
-//        mRef.push().setValue(story, new DatabaseReference.CompletionListener() {
-//            @Override
-//            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                uploadImageToFirebase(filePath, ref.getKey());
-//                Toast.makeText(activity_DangBai.this, "Upload successfully", Toast.LENGTH_LONG).show();
-//
-//                Chapter chapter = new Chapter(nameChapter, contentChapter, ref.getKey());
-//                mChapterRef.push().setValue(chapter, new DatabaseReference.CompletionListener() {
-//                    @Override
-//                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//
-//                    }
-//                });
-//            }
-//        });
-//
-//    }
 }

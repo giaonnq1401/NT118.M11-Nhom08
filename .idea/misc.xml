@@ -21,8 +21,10 @@
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_home_page.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_noidung.xml" value="0.17291666666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile.xml" value="0.27447916666666666" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_profile_update.xml" value="0.225" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_story.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/activity_update_story.xml" value="0.24954710144927536" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/content_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_about_me.xml" value="0.264" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_chapter.xml" value="0.1828125" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/fragment_choose_story_update.xml" value="0.24427083333333333" />
@@ -37,6 +39,7 @@
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/layout/my_story_list.xml" value="0.27447916666666666" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/menu/navigation_header.xml" value="0.2453125" />
         <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/menu/navigation_menu.xml" value="0.27447916666666666" />
+        <entry key="..\:/DEADLINE/HK5/Mago/NT118.M11-Nhom08/app/src/main/res/menu/profile_setting.xml" value="0.225" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/drawable/button_border.xml" value="0.21354166666666666" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/drawable/edit_text_border.xml" value="0.290625" />
         <entry key="..\:/DEADLINE/HK5/PTUDTTBDD/NT118.M11-Nhom08/app/src/main/res/drawable/gradient.xml" value="0.290625" />

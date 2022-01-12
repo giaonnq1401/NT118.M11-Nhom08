@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="welcome"
-        android:textSize="30sp"
+        android:textSize="35sp"
         android:fontFamily="@font/montserratsemibold"
         android:textAllCaps="true"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -39,7 +39,7 @@
         android:fontFamily="@font/montserratregular"
         android:text="Sign in to continue"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_welcome"
         android:layout_marginTop="@dimen/margin_basex4"/>
@@ -118,13 +118,13 @@
             app:layout_constraintVertical_bias=".45" />
 
         <CheckBox
-            android:id="@+id/cbRemember"
+            android:id="@+id/cbShowPwd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/pass_input"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="Remember Me" />
+            android:text="Show Password" />
 
         <Button
             android:id="@+id/btn_login"
