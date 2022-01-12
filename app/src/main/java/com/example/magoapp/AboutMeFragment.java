@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,31 +26,17 @@ import com.google.firebase.database.ValueEventListener;
  */
 public class AboutMeFragment extends Fragment {
 
-    private TextInputEditText ed_username, ed_birthday, ed_hobbies;
+    private TextView tv_zodiac, tv_hobbies, tv_quotes;
     DatabaseReference mRef;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String mParam1, mParam2;
 
     public AboutMeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AboutMeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AboutMeFragment newInstance(String param1, String param2) {
         AboutMeFragment fragment = new AboutMeFragment();
         Bundle args = new Bundle();
@@ -79,11 +66,12 @@ public class AboutMeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ed_username = (TextInputEditText) getView().findViewById(R.id.user_name);
-        ed_birthday = (TextInputEditText) getView().findViewById(R.id.birthday);
+        tv_zodiac = (TextView) getView().findViewById(R.id.tv_zodiac);
+        tv_hobbies = (TextView) getView().findViewById(R.id.tv_hobbies);
+        tv_quotes = (TextView) getView().findViewById(R.id.tv_quotes);
 
         mRef = FirebaseDatabase.getInstance().getReference("Users");
-//        getInfo();
+        getInfo();
     }
 
     private void getInfo() {
@@ -91,10 +79,11 @@ public class AboutMeFragment extends Fragment {
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    if (currentUser.equals(ds.getKey())){
-                        ed_username.setText(ds.child("nameUser").getValue(String.class));
-                        ed_birthday.setText(ds.child("doBUser").getValue(String.class));
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (currentUser.equals(ds.getKey())) {
+                        tv_zodiac.setText(ds.child("zodiac").getValue(String.class));
+                        tv_hobbies.setText(ds.child("hobbies").getValue(String.class));
+                        tv_quotes.setText(ds.child("quotes").getValue(String.class));
                     }
                 }
             }

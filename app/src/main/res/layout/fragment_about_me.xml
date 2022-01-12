@@ -13,13 +13,14 @@
         android:layout_margin="@dimen/margin_basex2">
         <TextView
             android:id="@+id/tvZodiac"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserratsemibold"
             android:textSize="20sp"
             android:text="Zodiac:"/>
 
         <TextView
+            android:id="@+id/tv_zodiac"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/tvZodiac"
@@ -36,13 +37,14 @@
         android:layout_margin="@dimen/margin_basex2">
     <TextView
         android:id="@+id/tvHobbies"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserratsemibold"
         android:textSize="20sp"
         android:text="Hobbies: "/>
 
         <TextView
+            android:id="@+id/tv_hobbies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/tvHobbies"
@@ -60,13 +62,14 @@
 
         <TextView
             android:id="@+id/tvQuotes"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserratsemibold"
             android:textSize="20sp"
             android:text="Quotes: "/>
 
         <TextView
+            android:id="@+id/tv_quotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/tvQuotes"

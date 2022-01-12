@@ -43,22 +43,31 @@
                 android:layout_toStartOf="@+id/signout"
                 android:src="@drawable/ic_edit" />
 
+
             <ImageView
                 android:id="@+id/signout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_signout" />
-        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/profile_image"
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_below="@+id/toolbar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_basex4"
-            app:srcCompat="@drawable/user__2_" />
+            android:elevation="12dp"
+            android:id="@+id/cardview"
+            app:cardCornerRadius="50dp"
+            android:layout_below="@id/toolbar"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/profile_image"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/user__2_" />
+        </androidx.cardview.widget.CardView>
 
 
         <ProgressBar
@@ -73,7 +82,7 @@
             android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_image"
+            android:layout_below="@+id/cardview"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin_basex2"
             android:fontFamily="@font/montserratsemibold"

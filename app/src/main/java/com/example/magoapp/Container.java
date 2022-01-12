@@ -16,14 +16,18 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class Container extends AppCompatActivity implements View.OnClickListener{
 
     ImageView imgViewProfile;
-
     TextView tvTitle;
+    DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,8 @@ public class Container extends AppCompatActivity implements View.OnClickListener
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-
+        mRef = FirebaseDatabase.getInstance().getReference("Users");
+        getInfo();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,6 +70,25 @@ public class Container extends AppCompatActivity implements View.OnClickListener
             return true;
         }
     };
+
+    private void getInfo() {
+        String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (currentUser.equals(ds.getKey())) {
+                        Picasso.get().load(ds.child("mImageUrl").getValue(String.class)).placeholder(R.drawable.user__1_).fit().centerCrop().into(imgViewProfile);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
