@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -83,52 +84,75 @@ public class activity_story extends AppCompatActivity {
     //Lưu truyện vào danh sách truyện đang đọc
     private void readingStory() {
         Reading reading = new Reading(idStory, idUser);
-        mReadingRef.addValueEventListener(new ValueEventListener() {
+        Query query = mReadingRef.orderByChild("user").equalTo(idUser);
+        Query checkStory = mReadingRef.orderByChild("idStory").equalTo(idStory);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    if(!(ds.child("idStory").exists() && ds.child("user").exists())){
-                        mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (snapshot.exists()){
+                    checkStory.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot ds) {
+                            if (!ds.exists()){
+                                mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {}
+                                });
                             }
-                        });
-                    }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                }
+                else {
+                    mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {}
+                    });
                 }
             }
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
-
     }
 
     //Lưu truyện vào thư viện
     private void saveStory() {
         Library library = new Library(idStory, idUser);
-        mLibraryRef.addValueEventListener(new ValueEventListener() {
+        Query query = mLibraryRef.orderByChild("user").equalTo(idUser);
+        Query checkStory = mLibraryRef.orderByChild("idStory").equalTo(idStory);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (!(ds.child("idStory").exists() && ds.child("user").exists())) {
-                        mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
+                if (snapshot.exists()){
+                    checkStory.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot ds) {
+                            if (ds.exists()){
+                                Toast.makeText(activity_story.this, "This story has been saved to the library before!", Toast.LENGTH_LONG).show();
                             }
-                        });
-                    }
-                    else {
-                        Toast.makeText(activity_story.this, "This story has been saved to the library before!", Toast.LENGTH_SHORT).show();
-                    }
+                            else {
+                                mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                        Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                }
+                else {
+                    mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {}
+                    });
                 }
             }
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 

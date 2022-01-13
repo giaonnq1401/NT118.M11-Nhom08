@@ -149,36 +149,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 if (dataSnapshot.exists()) {
-//                    for (DataSnapshot ds : snapshot.getChildren()) {
                         keys.add(dataSnapshot.getKey());
                         name = dataSnapshot.child("sName").getValue(String.class);
                         desc = dataSnapshot.child("sDesc").getValue(String.class);
                         image = dataSnapshot.child("sImage").getValue(String.class);
                         Story newStory = new Story(name, desc, image);
                         adapter.add(newStory);
-//                    }
                 }
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {}
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
 
         });
     }
