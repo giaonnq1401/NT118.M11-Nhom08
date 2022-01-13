@@ -78,7 +78,9 @@ public class Container extends AppCompatActivity implements View.OnClickListener
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (currentUser.equals(ds.getKey())) {
-                        Picasso.get().load(ds.child("mImageUrl").getValue(String.class)).placeholder(R.drawable.user__1_).fit().centerCrop().into(imgViewProfile);
+                        if (!ds.child("mImageUrl").getValue(String.class).isEmpty()){
+                            Picasso.get().load(ds.child("mImageUrl").getValue(String.class)). placeholder(R.drawable.user__1_).fit().centerCrop().into(imgViewProfile);
+                        }
                     }
                 }
             }

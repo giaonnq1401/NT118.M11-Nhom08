@@ -132,7 +132,9 @@ public class Profile extends AppCompatActivity implements View.OnClickListener {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (currentUser.equals(ds.getKey())) {
-                        Picasso.get().load(ds.child("mImageUrl").getValue(String.class)).placeholder(R.drawable.user__2_).fit().centerCrop().into(imgAva);
+                        if (!ds.child("mImageUrl").getValue(String.class).isEmpty()){
+                            Picasso.get().load(ds.child("mImageUrl").getValue(String.class)).fit().centerCrop().into(imgAva);
+                        }
                         tv_userName.setText(ds.child("nameUser").getValue(String.class));
                     }
                 }

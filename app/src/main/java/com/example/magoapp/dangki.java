@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class dangki extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,7 +39,9 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
+    String joinDate;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +56,11 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         pwdConfirm = (EditText) findViewById(R.id.cf_password_signup);
         regBtn = (Button) findViewById(R.id.btn_signup);
         login = (TextView) findViewById(R.id.login);
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        joinDate = df.format(c);
+//        Toast.makeText(dangki.this, "Today is " + joinDate, Toast.LENGTH_SHORT).show();
 
         regBtn.setOnClickListener(this);
         login.setOnClickListener(this);
@@ -98,10 +107,11 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         String passConfirm = pwdConfirm.getText().toString().trim();
         String birthday = editdate.getText().toString().trim();
         String mImageUrl = "";
-        String zodiac = "";
-        String hobbies = "";
-        String quotes = "";
+        String zodiac = "zodiac";
+        String hobbies = "hobbies";
+        String quotes = "quotes";
 
+        //Kiểm tra dữ liệu nhập vào khi đăng ký tài khoản
         if (username.isEmpty()){
             regUsername.setError("Username is required!");
             regUsername.requestFocus();
@@ -148,7 +158,6 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-
                 if (task.isSuccessful()){
                     Users user = new Users(username, email, birthday, mImageUrl, zodiac, hobbies, quotes);
 
@@ -157,11 +166,10 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-
                             if (task.isSuccessful()){
                                 Toast.makeText(dangki.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
-
-                                //redirect to login layout
+                                Intent intent = new Intent(dangki.this, dangnhap.class);
+                                startActivity(intent);
                             }else{
                                 Toast.makeText(dangki.this, "Failed to register! Please try again.", Toast.LENGTH_LONG).show();
                             }

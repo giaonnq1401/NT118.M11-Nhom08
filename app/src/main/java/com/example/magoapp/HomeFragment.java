@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -89,58 +90,96 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
-
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //my story list
         mRef = FirebaseDatabase.getInstance().getReference("Story");
 
         lvStory = (ListView) getView().findViewById(R.id.lvStory);
 
-        ValueEventListener event = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                libStory(snapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-        mRef.addListenerForSingleValueEvent(event);
+//        ValueEventListener event = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                libStory(snapshot);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        };
+//        mRef.addListenerForSingleValueEvent(event);
 
         lvStory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 idStory = keys.get(position);
                 Intent intent = new Intent(getActivity(), activity_story.class);
-                intent.putExtra("idStory",idStory);
-                ((Container)getActivity()).startActivity(intent);
+                intent.putExtra("idStory", idStory);
+                ((Container) getActivity()).startActivity(intent);
             }
         });
 
         storageRef = FirebaseStorage.getInstance().getReference();
+        libStory();
     }
 
-    private void libStory(DataSnapshot snapshot) {
+    private void libStory() {
+//        ArrayList<Story> array = new ArrayList<Story>();
+//        StoryAdapter adapter = new StoryAdapter(getActivity(), array);
+//        lvStory.setAdapter(adapter);
+//        if (snapshot.exists()) {
+//            for (DataSnapshot ds : snapshot.getChildren()) {
+//                keys.add(ds.getKey());
+//                name = ds.child("sName").getValue(String.class);
+//                desc = ds.child("sDesc").getValue(String.class);
+//                image = ds.child("sImage").getValue(String.class);
+//                Story newStory = new Story(name, desc, image);
+//                adapter.add(newStory);
+//            }
+//        }
+
         ArrayList<Story> array = new ArrayList<Story>();
         StoryAdapter adapter = new StoryAdapter(getActivity(), array);
         lvStory.setAdapter(adapter);
-        if (snapshot.exists()) {
-            for (DataSnapshot ds : snapshot.getChildren()) {
-                keys.add(ds.getKey());
-                name = ds.child("sName").getValue(String.class);
-                desc = ds.child("sDesc").getValue(String.class);
-                image = ds.child("sImage").getValue(String.class);
-                Story newStory = new Story(name, desc, image);
-                adapter.add(newStory);
+        mRef.orderByValue().limitToLast(10).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
+                if (dataSnapshot.exists()) {
+//                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        keys.add(dataSnapshot.getKey());
+                        name = dataSnapshot.child("sName").getValue(String.class);
+                        desc = dataSnapshot.child("sDesc").getValue(String.class);
+                        image = dataSnapshot.child("sImage").getValue(String.class);
+                        Story newStory = new Story(name, desc, image);
+                        adapter.add(newStory);
+//                    }
+                }
             }
-        }
-    }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+
+        });
+    }
 }

@@ -35,23 +35,36 @@ public class StoryAdapter extends ArrayAdapter<Story> {
         TextView tvName = (TextView) convertView.findViewById(R.id.name_story);
         TextView tvDesc = (TextView) convertView.findViewById(R.id.desc_story);
         ImageView imgStory = (ImageView) convertView.findViewById(R.id.img_story);
-        String desc = "";
+
+//        String desc = "";
+//        if (!story.getsDesc().toString().isEmpty()) {
+//            if (story.getsDesc().toString().length() > 10) {
+//                String[] arr = story.getsDesc().toString().split("\\s");
+//                for (int i = 0; i < 10; i ++){
+//                    desc = desc + " " + String.valueOf(arr[i]);
+//                }
+//                tvDesc.setText(desc + "...");
+//            }
+//            else{
+//                tvDesc.setText(story.getsDesc());
+//            }
+//        }
+
+        String desc = story.getsDesc();
+        String arr[] = desc.split("\\s");
+        String description = "";
+        if (arr.length > 10){
+            for (int i = 0; i < 10; i++){
+                description = description + " " + arr[i];
+            }
+            tvDesc.setText(description + "...");
+        }
+        else {
+            tvDesc.setText(desc);
+        }
 
         tvName.setText(story.getsName());
-
-        if (!story.getsDesc().toString().isEmpty()) {
-            if (story.getsDesc().toString().length() > 10) {
-                String[] replace = story.getsDesc().toString().split("\\s");
-                for (int i = 0; i < 10; i ++){
-                    desc = desc + " " + String.valueOf(replace[i]);
-                }
-                tvDesc.setText(desc + "...");
-            }
-            else{
-                tvDesc.setText(story.getsDesc());
-            }
-        }
-        Picasso.get().load(story.getsImage()).placeholder(R.drawable.ic_image).into(imgStory);
+        Picasso.get().load(story.getsImage()).placeholder(R.drawable.ic_image).fit().centerCrop().into(imgStory);
         return convertView;
     }
 

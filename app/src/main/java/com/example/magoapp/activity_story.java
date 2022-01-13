@@ -28,8 +28,6 @@ import com.squareup.picasso.Picasso;
 
 public class activity_story extends AppCompatActivity {
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
     TextView tv_storyName, tv_storyAuth, tv_storyDesc;
     ImageView imageStory;
     Button btn_Read, btn_Save;
@@ -37,6 +35,7 @@ public class activity_story extends AppCompatActivity {
     String idStory, authStory;
 
     DatabaseReference mStoryRef, mUserRef, mLibraryRef, mReadingRef;
+    String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,27 +80,59 @@ public class activity_story extends AppCompatActivity {
 
     }
 
+    //Lưu truyện vào danh sách truyện đang đọc
     private void readingStory() {
-        String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Reading reading = new Reading(idStory, idUser);
-        mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
+        mReadingRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    if(!(ds.child("idStory").exists() && ds.child("user").exists())){
+                        mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
+    //Lưu truyện vào thư viện
+    private void saveStory() {
+        Library library = new Library(idStory, idUser);
+        mLibraryRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (!(ds.child("idStory").exists() && ds.child("user").exists())) {
+                        mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                    else {
+                        Toast.makeText(activity_story.this, "This story has been saved to the library before!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }
 
-    private void saveStory() {
-            String idUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            Library library = new Library(idStory, idUser);
-            mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                    Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
-                }
-            });
-    }
-
+    //Lấy thông tin của truyện
     private void getStory(){
         mStoryRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -122,7 +153,6 @@ public class activity_story extends AppCompatActivity {
                                     }
                                 }
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -131,7 +161,6 @@ public class activity_story extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
