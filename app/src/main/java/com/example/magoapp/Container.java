@@ -34,7 +34,6 @@ public class Container extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container);
 
-
         imgViewProfile = (ImageView) findViewById(R.id.imgUser);
         imgViewProfile.setOnClickListener(this);
         tvTitle = (TextView) findViewById(R.id.tv_title);

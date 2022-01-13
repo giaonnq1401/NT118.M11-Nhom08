@@ -147,7 +147,6 @@ public class SearchFragment extends Fragment {
             mSearchField.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                     String name = mSearchField.getText().toString();
                     searchStory(name);
                 }
@@ -163,8 +162,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                ArrayList<Story> arrayOfUsers = new ArrayList<Story>();
-                StoryAdapter adapter = new StoryAdapter(getActivity(), arrayOfUsers);
+                ArrayList<Story> array = new ArrayList<Story>();
+                StoryAdapter adapter = new StoryAdapter(getActivity(), array);
                 mResultList.setAdapter(adapter);
                 if (snapshot.exists()){
                     for (DataSnapshot ds : snapshot.getChildren()) {
