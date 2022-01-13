@@ -103,12 +103,6 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-//    private void updateUser() {
-//        Users user = new Users(username, birthday, image, zodiac, hobbies, quotes);
-//        Map<String, Object> postValues = user.toMap();
-//        mRef.child(currentUser).updateChildren(postValues);
-//    }
-
     private void uploadFile() {
         if (mImageUri != null) {
             StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
@@ -135,23 +129,13 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
                     taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            // Wrap with Uri.parse() when retrieving
                             Users user = new Users(username, birthday, uri.toString(), zodiac, hobbies, quotes);
                             Map<String, Object> postValues = user.toMap();
                             mRef.child(currentUser).updateChildren(postValues);
-//                            mRef.push().setValue(story, new DatabaseReference.CompletionListener() {
-//                                @Override
-//                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-//                                    Toast.makeText(activity_DangBai.this, "Upload successfully", Toast.LENGTH_LONG).show();
-//
-//                                }
-//                            });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle any errors
-                        }
+                        public void onFailure(@NonNull Exception exception) {}
                     });
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -172,13 +156,14 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
     }
 
     private void getInfo() {
-
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds : snapshot.getChildren()){
                     if (currentUser.equals(ds.getKey())){
-                        Picasso.get().load(ds.child("mImageUrl").getValue(String.class)).placeholder(R.drawable.user__2_).into(img_profile);
+                        if (!ds.child("mImageUrl").getValue(String.class).isEmpty()){
+                            Picasso.get().load(ds.child("mImageUrl").getValue(String.class)).placeholder(R.drawable.user__2_).into(img_profile);
+                        }
                         ed_username.setText(ds.child("nameUser").getValue(String.class));
                         ed_birthday.setText(ds.child("doBUser").getValue(String.class));
                         ed_zodiac.setText(ds.child("zodiac").getValue(String.class));

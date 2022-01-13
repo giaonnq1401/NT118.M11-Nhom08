@@ -2,87 +2,101 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/margin_base"
     tools:context=".AboutMeFragment">
 
     <RelativeLayout
-        android:id="@+id/zodiac"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_basex2">
-        <TextView
-            android:id="@+id/tvZodiac"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratsemibold"
-            android:textSize="20sp"
-            android:text="Zodiac:"/>
-
-        <TextView
-            android:id="@+id/tv_zodiac"
+            android:id="@+id/zodiac"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tvZodiac"
-            android:layout_marginLeft="@dimen/margin_basex4"
-            android:fontFamily="@font/montserratregular"
-            android:textSize="20sp"/>
-    </RelativeLayout>
+            android:layout_margin="@dimen/margin_basex2">
+            <ImageView
+                android:id="@+id/ic_zodiac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_hobbies"
+                android:layout_marginRight="@dimen/margin_base"/>
+            <TextView
+                android:id="@+id/tvZodiac"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserratsemibold"
+                android:layout_toEndOf="@id/ic_zodiac"
+                android:textSize="20sp"
+                android:text="Zodiac"/>
+
+            <TextView
+                android:id="@+id/tv_zodiac"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tvZodiac"
+                android:layout_marginLeft="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratregular"
+                android:textSize="20sp"/>
+        </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/hobbies"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/zodiac"
-        android:layout_margin="@dimen/margin_basex2">
-    <TextView
-        android:id="@+id/tvHobbies"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserratsemibold"
-        android:textSize="20sp"
-        android:text="Hobbies: "/>
-
-        <TextView
-            android:id="@+id/tv_hobbies"
+            android:id="@+id/hobbies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tvHobbies"
-            android:layout_marginLeft="@dimen/margin_basex4"
-            android:fontFamily="@font/montserratregular"
-            android:textSize="20sp"/>
-    </RelativeLayout>
+            android:layout_below="@id/zodiac"
+            android:layout_margin="@dimen/margin_basex2">
+            <ImageView
+                android:id="@+id/ic_hobbies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_hobbies"
+                android:layout_marginRight="@dimen/margin_base"/>
+            <TextView
+                android:id="@+id/tvHobbies"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserratsemibold"
+                android:textSize="20sp"
+                android:layout_toEndOf="@id/ic_hobbies"
+                android:text="Hobbies"/>
+
+            <TextView
+                android:id="@+id/tv_hobbies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tvHobbies"
+                android:layout_marginLeft="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratregular"
+                android:textSize="20sp"/>
+        </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/quotes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/hobbies"
-        android:layout_margin="@dimen/margin_basex2">
-
-        <TextView
-            android:id="@+id/tvQuotes"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserratsemibold"
-            android:textSize="20sp"
-            android:text="Quotes: "/>
-
-        <TextView
-            android:id="@+id/tv_quotes"
+            android:id="@+id/quotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tvQuotes"
-            android:layout_marginLeft="@dimen/margin_basex4"
-            android:fontFamily="@font/montserratregular"
-            android:textSize="20sp"/>
-    </RelativeLayout>
+            android:layout_below="@+id/hobbies"
+            android:layout_margin="@dimen/margin_basex2">
+            <ImageView
+                android:id="@+id/ic_quotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_hobbies"
+                android:layout_marginRight="@dimen/margin_base"/>
+            <TextView
+                android:id="@+id/tvQuotes"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserratsemibold"
+                android:layout_toEndOf="@id/ic_quotes"
+                android:textSize="20sp"
+                android:text="Quotes"/>
 
-    <RelativeLayout
-        android:id="@+id/social"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/tv_quotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/tvQuotes"
+                android:layout_marginLeft="@dimen/margin_basex2"
+                android:fontFamily="@font/montserratregular"
+                android:textSize="20sp"/>
+        </RelativeLayout>
 
-    </RelativeLayout>
 </RelativeLayout>

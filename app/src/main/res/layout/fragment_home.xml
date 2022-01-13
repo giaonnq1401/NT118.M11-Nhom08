@@ -7,90 +7,33 @@
     tools:context=".HomeFragment"
     android:id="@+id/fragment_home">
 
-    <!-- TODO: Update blank fragment layout -->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/ll_readingNow"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/reading_now"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:fontFamily="@font/montserratregular"-->
-<!--            android:textSize="20sp"/>-->
-
-<!--        <ListView-->
-<!--            android:id="@+id/lv_readingNow"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            />-->
-<!--    </LinearLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:id="@+id/ll_hotStory"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/ll_readingNow"-->
-<!--        app:layout_constraintLeft_toLeftOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent">-->
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fontFamily="@font/montserratregular"-->
-<!--            android:text="@string/hot_story"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="20sp" />-->
-
-<!--        <ListView-->
-<!--            android:id="@+id/lv_hotStory"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            />-->
-<!--    </LinearLayout>-->
-
-
-<!--    <RelativeLayout-->
-
-<!--        xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        tools:ignore="MissingConstraints"-->
-<!--        android:background="@drawable/vien"-->
-<!--        android:padding="10dp">-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imglisttruyen"-->
-<!--            android:layout_width="90dp"-->
-<!--            android:layout_height="80dp"-->
-<!--            android:src="@drawable/ic_image"-->
-<!--            />-->
-
-<!--        <TextView-->
-
-<!--            android:id="@+id/tv_nameStory"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_toEndOf="@+id/imglisttruyen"-->
-<!--            android:fontFamily="@font/montserratregular"-->
-<!--            android:gravity="center"-->
-<!--            android:text="Tên truyện"-->
-<!--            android:textSize="25dp" />-->
-
-<!--    </RelativeLayout>-->
-
-    <ListView
-        android:id="@+id/lvStory"
+    <LinearLayout
+        android:id="@+id/ll_newest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NEWEST"
+            android:textColor="@color/black"
+            android:layout_marginBottom="@dimen/margin_basex2"
+            android:fontFamily="@font/montserratregular"
+            android:textSize="20sp"/>
+
+        <ListView
+            android:id="@+id/lvStory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -141,7 +141,6 @@ public class SearchFragment extends Fragment {
                 String name = ds.child("sName").getValue(String.class);
                 names.add(name);
             }
-
             ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, names);
             mSearchField.setAdapter(adapter);
 
