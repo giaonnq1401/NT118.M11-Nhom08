@@ -36,7 +36,7 @@ public class activity_DangBai extends AppCompatActivity {
 
     private EditText ed_nameStory, ed_descStory, ed_nameChapter, ed_contentChapter;
     private Button btn_upload;
-    private ImageView img_story;
+    private ImageView img_story, back;
     private ProgressBar progressBar;
     private String currentuser, nameStory, descStory, nameChapter, contentChapter;
     private Uri mImageUri;
@@ -60,6 +60,7 @@ public class activity_DangBai extends AppCompatActivity {
         ed_nameChapter = (EditText) findViewById(R.id.dbChapter);
         ed_contentChapter = (EditText) findViewById(R.id.dbnoidung);
         btn_upload = (Button) findViewById(R.id.btn_dangbai);
+        back = (ImageView) findViewById(R.id.back);
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
 
@@ -69,6 +70,12 @@ public class activity_DangBai extends AppCompatActivity {
         storageRef = FirebaseStorage.getInstance().getReference("Story");
         mChapterRef = database.getReference("Chapter");
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         img_story.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +131,7 @@ public class activity_DangBai extends AppCompatActivity {
                         }
                     }, 5000);
 
-                    Toast.makeText(activity_DangBai.this, "Upload Successful", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(activity_DangBai.this, "Upload Successful", Toast.LENGTH_LONG).show();
 
                     nameStory = ed_nameStory.getText().toString().trim();
                     descStory = ed_descStory.getText().toString().trim();
@@ -145,7 +152,8 @@ public class activity_DangBai extends AppCompatActivity {
                                     mChapterRef.push().setValue(chapter, new DatabaseReference.CompletionListener() {
                                         @Override
                                         public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-
+//                                            startActivity(new Intent(activity_DangBai.this, Profile.class));
+                                            finish();
                                         }
                                     });
                                 }

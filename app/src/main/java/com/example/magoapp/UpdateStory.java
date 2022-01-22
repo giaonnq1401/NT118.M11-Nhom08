@@ -93,6 +93,8 @@ public class UpdateStory extends AppCompatActivity {
             @Override
             public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
                 Toast.makeText(UpdateStory.this, "Upload successfully", Toast.LENGTH_LONG).show();
+//                startActivity(new Intent(UpdateStory.this, Profile.class));
+                finish();
             }
         });
     }

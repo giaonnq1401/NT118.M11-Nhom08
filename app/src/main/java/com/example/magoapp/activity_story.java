@@ -8,9 +8,12 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +30,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 public class activity_story extends AppCompatActivity {
 
     TextView tv_storyName, tv_storyAuth, tv_storyDesc;
     ImageView imageStory;
     Button btn_Read, btn_Save;
-
+    private ProgressBar progressBar;
     String idStory, authStory;
 
     DatabaseReference mStoryRef, mUserRef, mLibraryRef, mReadingRef;
@@ -52,6 +57,7 @@ public class activity_story extends AppCompatActivity {
         btn_Read = (Button) findViewById(R.id.btnRead);
         btn_Save = (Button) findViewById(R.id.btn_savetolibrary);
         imageStory = (ImageView) findViewById(R.id.story_image);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         tv_storyDesc.setMovementMethod( new ScrollingMovementMethod());
 
@@ -60,6 +66,7 @@ public class activity_story extends AppCompatActivity {
         mLibraryRef = FirebaseDatabase.getInstance().getReference("Library");
         mReadingRef = FirebaseDatabase.getInstance().getReference("Reading");
 
+        progressBar.setVisibility(View.VISIBLE);
         getStory();
 
         btn_Read.setOnClickListener(new View.OnClickListener() {
@@ -83,77 +90,71 @@ public class activity_story extends AppCompatActivity {
 
     //Lưu truyện vào danh sách truyện đang đọc
     private void readingStory() {
-        Reading reading = new Reading(idStory, idUser);
-        Query query = mReadingRef.orderByChild("user").equalTo(idUser);
-        Query checkStory = mReadingRef.orderByChild("idStory").equalTo(idStory);
+        Query query = mReadingRef.orderByKey().equalTo(idUser);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    checkStory.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot ds) {
-                            if (!ds.exists()){
-                                mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
-                                    @Override
-                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {}
-                                });
-                            }
+                Query queryStory = mReadingRef.child(idUser).orderByKey().equalTo(idStory);
+                queryStory.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snap) {
+                        if (!snap.exists()){
+                            mReadingRef.child(idUser).child(idStory).setValue(idStory, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                }
+                            });
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-                    });
-                }
-                else {
-                    mReadingRef.push().setValue(reading, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {}
-                    });
-                }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
 
     //Lưu truyện vào thư viện
     private void saveStory() {
-        Library library = new Library(idStory, idUser);
-        Query query = mLibraryRef.orderByChild("user").equalTo(idUser);
-        Query checkStory = mLibraryRef.orderByChild("idStory").equalTo(idStory);
+        Query query = mLibraryRef.orderByKey().equalTo(idUser);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    checkStory.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot ds) {
-                            if (ds.exists()){
-                                Toast.makeText(activity_story.this, "This story has been saved to the library before!", Toast.LENGTH_LONG).show();
-                            }
-                            else {
-                                mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
-                                    @Override
-                                    public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                                        Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
-                                    }
-                                });
-                            }
+                Query queryStory = mLibraryRef.child(idUser).orderByKey().equalTo(idStory);
+                queryStory.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snap) {
+                        if (snap.exists()){
+                            Toast.makeText(activity_story.this, "This story has been saved to the library before!", Toast.LENGTH_SHORT).show();
                         }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-                    });
-                }
-                else {
-                    mLibraryRef.push().setValue(library, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {}
-                    });
-                }
+                        else {
+                            mLibraryRef.child(idUser).child(idStory).setValue(idStory, new DatabaseReference.CompletionListener() {
+                                @Override
+                                public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                    Toast.makeText(activity_story.this, "Saved", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
+
     }
 
     //Lấy thông tin của truyện
@@ -178,12 +179,11 @@ public class activity_story extends AppCompatActivity {
                                 }
                             }
                             @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
+                            public void onCancelled(@NonNull DatabaseError error) {}
                         });
                     }
                 }
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

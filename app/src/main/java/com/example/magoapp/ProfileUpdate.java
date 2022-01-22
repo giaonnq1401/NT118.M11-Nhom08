@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
@@ -57,6 +58,7 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
     DatabaseReference mRef;
     String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +107,7 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
 
     private void uploadFile() {
         if (mImageUri != null) {
-            StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(mImageUri));
+            StorageReference fileReference = storageRef.child(currentUser + ".jpg");
 
             fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -132,6 +134,9 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
                             Users user = new Users(username, birthday, uri.toString(), zodiac, hobbies, quotes);
                             Map<String, Object> postValues = user.toMap();
                             mRef.child(currentUser).updateChildren(postValues);
+                            progressBar.setVisibility(View.GONE);
+//                            startActivity(new Intent(ProfileUpdate.this, Profile.class));
+                            finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -142,16 +147,20 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(ProfileUpdate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
                     double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                     progressBar.setProgress((int) progress);
+                    progressBar.setVisibility(View.VISIBLE);
                 }
             });
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -188,8 +197,10 @@ public class ProfileUpdate extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.profile_image:
                 openFileChooser();
+                break;
             case R.id.btnUpdate:
                 uploadFile();
+                break;
         }
     }
 

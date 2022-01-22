@@ -1,12 +1,28 @@
 package com.example.magoapp.data;
 
+import com.google.firebase.database.Exclude;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Library {
-    String idStory, reader;
+    String idStory, user;
 
     public Library(String idStory, String user) {
         this.idStory = idStory;
-        this.reader = user;
+        this.user = user;
     }
+
+    public Library(String idStory) {
+        this.idStory = idStory;
+    }
+
+//    @Exclude
+//    public Map<String, Object> toMap() {
+//        HashMap<String, Object> result = new HashMap<>();
+//        result.put(,idStory);
+//        return result;
+//    }
 
     public String getIdStory() {
         return idStory;
@@ -17,10 +33,10 @@ public class Library {
     }
 
     public String getUser() {
-        return reader;
+        return user;
     }
 
     public void setUser(String user) {
-        this.reader = user;
+        this.user = user;
     }
 }

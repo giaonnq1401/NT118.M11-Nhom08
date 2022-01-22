@@ -4,8 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.text.method.MovementMethod;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,6 +23,7 @@ public class activity_noidung extends AppCompatActivity {
     TextView txtTenTruyen, txtNoidung;
     String idChapter;
     DatabaseReference mRef;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,7 @@ public class activity_noidung extends AppCompatActivity {
 
         txtNoidung = findViewById(R.id.Noidung);
         txtTenTruyen = findViewById(R.id.TenTruyen);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         //lay du lieu
         Intent intent = getIntent();
@@ -41,6 +47,7 @@ public class activity_noidung extends AppCompatActivity {
     }
 
     private void getContent() {
+        progressBar.setVisibility(View.VISIBLE);
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -50,6 +57,7 @@ public class activity_noidung extends AppCompatActivity {
                         String content = ds.child("contentChapter").getValue().toString().replace("\\n", "\n");
                         txtNoidung.setText(content);
                     }
+                    progressBar.setVisibility(View.GONE);
                 }
             }
 

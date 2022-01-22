@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.magoapp.admin.Admin;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -57,8 +58,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else {
-            Intent intent = new Intent(MainActivity.this, Container.class);
-            startActivity(intent);
+            if (user.getEmail().equals("admin.mago@gmail.com")){
+                Intent intent = new Intent(MainActivity.this, Admin.class);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(MainActivity.this, Container.class);
+                startActivity(intent);
+            }
         }
         finish();
     }
