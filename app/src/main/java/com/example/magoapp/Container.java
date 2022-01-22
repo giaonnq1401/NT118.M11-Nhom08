@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class Container extends AppCompatActivity implements View.OnClickListener{
+
+    private long pressedTime;
 
     ImageView imgViewProfile;
     TextView tvTitle;
@@ -78,7 +81,7 @@ public class Container extends AppCompatActivity implements View.OnClickListener
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     if (currentUser.equals(ds.getKey())) {
                         if (!ds.child("mImageUrl").getValue(String.class).isEmpty()){
-                            Picasso.get().load(ds.child("mImageUrl").getValue(String.class)). placeholder(R.drawable.user__1_).fit().centerCrop().into(imgViewProfile);
+                            Picasso.get().load(ds.child("mImageUrl").getValue(String.class)). placeholder(R.drawable.user__1_).into(imgViewProfile);
                         }
                     }
                 }
@@ -98,5 +101,17 @@ public class Container extends AppCompatActivity implements View.OnClickListener
                 startActivity(new Intent(this, Profile.class));
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            finishAffinity();
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 }

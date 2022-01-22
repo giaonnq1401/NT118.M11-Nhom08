@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="250dp"
         android:background="@drawable/story_background"
         android:padding="20dp">
 
@@ -31,7 +31,7 @@
             android:fontFamily="@font/montserratsemibold"
             android:text="Story's name"
             android:textColor="@color/textColor"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/story_author"
@@ -46,25 +46,25 @@
             android:textSize="17sp" />
 
 
-        <ImageView
-            android:id="@+id/ic_like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/story_author"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/story_image"
-            android:src="@drawable/ic_like" />
+<!--        <ImageView-->
+<!--            android:id="@+id/ic_like"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/story_author"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_toRightOf="@id/story_image"-->
+<!--            android:src="@drawable/ic_like" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/story_author"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/ic_like"
-            android:text="0"
-            android:textSize="17dp" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/story_author"-->
+<!--            android:layout_marginLeft="5dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_toRightOf="@id/ic_like"-->
+<!--            android:text="0"-->
+<!--            android:textSize="17dp" />-->
 
         <Button
             android:id="@+id/btn_savetolibrary"
@@ -119,4 +119,12 @@
         android:fontFamily="@font/montserratsemibold"
         android:text="READ NOW" />
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ll"
+        android:visibility="gone"/>
 </RelativeLayout>

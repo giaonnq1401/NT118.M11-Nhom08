@@ -9,7 +9,10 @@
         android:id="@+id/ll_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_basex4">
+        android:layout_marginStart="@dimen/margin_basex4"
+        android:layout_marginTop="@dimen/margin_basex4"
+        android:layout_marginEnd="@dimen/margin_basex4"
+        android:layout_marginBottom="@dimen/margin_basex4">
 
         <ImageView
             android:id="@+id/img_logo"
@@ -32,17 +35,17 @@
             android:textSize="35dp" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:elevation="12dp"
             android:id="@+id/cardview"
-            app:cardCornerRadius="50dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:elevation="12dp"
+            app:cardCornerRadius="50dp">
 
             <ImageView
                 android:id="@+id/imgUser"
-                android:layout_width="70dp"
+                android:layout_width="75dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/user__1_" />
         </androidx.cardview.widget.CardView>

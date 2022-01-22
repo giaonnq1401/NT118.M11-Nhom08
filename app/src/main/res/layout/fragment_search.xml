@@ -23,7 +23,7 @@
         android:background="@drawable/search_layout"
         android:hint="Search here ..."
         android:padding="@dimen/margin_basex2"
-        android:drawableRight="@drawable/ic_search"/>
+        android:drawableLeft="@drawable/ic_search"/>
 
     <ListView
         android:id="@+id/result_list"

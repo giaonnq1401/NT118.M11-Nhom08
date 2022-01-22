@@ -50,7 +50,7 @@ public class SearchFragment extends Fragment {
     private AutoCompleteTextView mSearchField;
     private ListView mResultList;
     private String idStory, nameStory, desc, image;
-    List<String> keys = new ArrayList<>();
+    List<String> keys;
     private DatabaseReference mUserDatabase, mStoryDatabase;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -161,18 +161,20 @@ public class SearchFragment extends Fragment {
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 ArrayList<Story> array = new ArrayList<Story>();
                 StoryAdapter adapter = new StoryAdapter(getActivity(), array);
                 mResultList.setAdapter(adapter);
                 if (snapshot.exists()){
                     for (DataSnapshot ds : snapshot.getChildren()) {
+                        keys = new ArrayList<>();
                         keys.add(ds.getKey());
+
                         nameStory = ds.child("sName").getValue(String.class);
                         desc = ds.child("sDesc").getValue(String.class);
                         image = ds.child("sImage").getValue(String.class);
                         Story newStory = new Story(name, desc, image);
                         adapter.add(newStory);
+                        adapter.setNotifyOnChange(true);
                     }
 
                 }else {

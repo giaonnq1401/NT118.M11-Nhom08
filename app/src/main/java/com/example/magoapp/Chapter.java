@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.magoapp.data.Story;
@@ -24,10 +25,12 @@ import java.util.List;
 
 public class Chapter extends AppCompatActivity {
 
-    DatabaseReference mRef;
+    DatabaseReference mRef, mStoryRef;
     String idStory, name, idChapter;
     private ListView lvChapter;
+    private TextView tvNameStory;
     List<String> keys = new ArrayList<>();
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,15 @@ public class Chapter extends AppCompatActivity {
         setContentView(R.layout.activity_chapter);
 
         lvChapter = (ListView) findViewById(R.id.lvChapter);
+        tvNameStory = (TextView) findViewById(R.id.name_story);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
         Intent intentGet = getIntent();
         idStory = intentGet.getStringExtra("idStory");
 
         mRef = FirebaseDatabase.getInstance().getReference("Chapter");
+        mStoryRef = FirebaseDatabase.getInstance().getReference("Story");
+        progressBar.setVisibility(View.VISIBLE);
+
         ValueEventListener event = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -52,6 +60,7 @@ public class Chapter extends AppCompatActivity {
         };
         mRef.addListenerForSingleValueEvent(event);
 
+
         lvChapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,6 +73,23 @@ public class Chapter extends AppCompatActivity {
     }
 
     private void getChapter(DataSnapshot snapshot) {
+        mStoryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot ds : snapshot.getChildren()){
+                        if (idStory.equals(ds.getKey())){
+                            tvNameStory.setText(ds.child("sName").getValue(String.class));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         ArrayList<String> chapterlist= new ArrayList<>();
         if (snapshot.exists()) {
             for (DataSnapshot ds : snapshot.getChildren()) {
@@ -75,7 +101,7 @@ public class Chapter extends AppCompatActivity {
             }
             ArrayAdapter adapter = new ArrayAdapter(this,R.layout.item_chapter, R.id.tvchapter, chapterlist);
             lvChapter.setAdapter(adapter);
-
+            progressBar.setVisibility(View.GONE);
         }
 
     }

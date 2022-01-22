@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
     private TextView login;
     private EditText editdate, regUsername, regEmail, regPwd, pwdConfirm;
     private Button regBtn;
-
+    private ProgressBar progressBar;
     private FirebaseDatabase database;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
@@ -56,6 +57,7 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         pwdConfirm = (EditText) findViewById(R.id.cf_password_signup);
         regBtn = (Button) findViewById(R.id.btn_signup);
         login = (TextView) findViewById(R.id.login);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -107,9 +109,9 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
         String passConfirm = pwdConfirm.getText().toString().trim();
         String birthday = editdate.getText().toString().trim();
         String mImageUrl = "";
-        String zodiac = "zodiac";
-        String hobbies = "hobbies";
-        String quotes = "quotes";
+        String zodiac = "";
+        String hobbies = "";
+        String quotes = "";
 
         //Kiểm tra dữ liệu nhập vào khi đăng ký tài khoản
         if (username.isEmpty()){
@@ -154,7 +156,7 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
             return;
         }
 
-
+        progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -170,13 +172,16 @@ public class dangki extends AppCompatActivity implements View.OnClickListener {
                                 Toast.makeText(dangki.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(dangki.this, dangnhap.class);
                                 startActivity(intent);
+                                progressBar.setVisibility(View.VISIBLE);
                             }else{
                                 Toast.makeText(dangki.this, "Failed to register! Please try again.", Toast.LENGTH_LONG).show();
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     });
                 }else {
                     Toast.makeText(dangki.this, "Failed to register! Please try again.", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });

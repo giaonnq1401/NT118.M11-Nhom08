@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
     private ListView lvStory;
     private String idStory, name, desc, image;
     List<String> keys = new ArrayList<>();
+    private ProgressBar progressBar;
 
 
     DatabaseReference mRef;
@@ -98,21 +100,8 @@ public class HomeFragment extends Fragment {
 
         mRef = FirebaseDatabase.getInstance().getReference("Story");
 
+        progressBar = (ProgressBar) getView().findViewById(R.id.progressbar);
         lvStory = (ListView) getView().findViewById(R.id.lvStory);
-
-//        ValueEventListener event = new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                libStory(snapshot);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        };
-//        mRef.addListenerForSingleValueEvent(event);
-
         lvStory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -128,36 +117,29 @@ public class HomeFragment extends Fragment {
     }
 
     private void libStory() {
-//        ArrayList<Story> array = new ArrayList<Story>();
-//        StoryAdapter adapter = new StoryAdapter(getActivity(), array);
-//        lvStory.setAdapter(adapter);
-//        if (snapshot.exists()) {
-//            for (DataSnapshot ds : snapshot.getChildren()) {
-//                keys.add(ds.getKey());
-//                name = ds.child("sName").getValue(String.class);
-//                desc = ds.child("sDesc").getValue(String.class);
-//                image = ds.child("sImage").getValue(String.class);
-//                Story newStory = new Story(name, desc, image);
-//                adapter.add(newStory);
-//            }
-//        }
-
         ArrayList<Story> array = new ArrayList<Story>();
         StoryAdapter adapter = new StoryAdapter(getActivity(), array);
         lvStory.setAdapter(adapter);
+        progressBar.setVisibility(View.VISIBLE);
         mRef.orderByValue().limitToLast(10).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 if (dataSnapshot.exists()) {
+//                    if (dataSnapshot.child("status").getValue(String.class).equals("1")){
                         keys.add(dataSnapshot.getKey());
                         name = dataSnapshot.child("sName").getValue(String.class);
                         desc = dataSnapshot.child("sDesc").getValue(String.class);
                         image = dataSnapshot.child("sImage").getValue(String.class);
                         Story newStory = new Story(name, desc, image);
                         adapter.add(newStory);
+                        progressBar.setVisibility(View.GONE);
+//                    }
+                }
+                else {
+                    Toast.makeText(getActivity(), "Can not load data. Please try again.", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
-
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {}
 
